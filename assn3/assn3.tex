@@ -1,12 +1,13 @@
 \documentclass[11pt]{article}
 
 \input{assignment-macros-0}
+\newcommand\tab[1][1cm]{\hspace*{#1}}
 
 % TODO: CHANGE NAME AND SID TO YOURS:
 
 \setTurnIn{3}
-\setAuthor{YOUR NAME HERE}
-\setSID{YOUR SID HERE}
+\setAuthor{Stanley Cohen (scohe001)}
+\setSID{861114309}
 \setHeader
 
 \begin{document}
@@ -28,25 +29,82 @@ Download this LaTeX file (along with \textsf{assignment-macros-0.tex}) to use as
     \begin{enumerate}
     \item
 
-      TODO: ANSWER 1(a)(i) 
+      My partner in this assignment was Michael (mpena010). His chosen problem was At least one round, at least one square. The problem states that you have a set of items where each item has a color trait and a shape trait. Each is red, blue, round or square. There is at least one red, one blue, one round and one square object. The problem asks us to prove that there must exist at least two objects that are different both in color and in shape. Michael split this problem into the following 6 cases:
+      \begin{itemize}
+        \item The case where every item but one is blue. In this case, since we must have a square and a circular object, regardless of what shape the blue object is, there must be a complimentary red object.
+        \item The same case as the first, but swapping red for blue.
+        \item The same case as the first, but dealing with all round and one square.
+        \item The same case as the first, but dealing with all square and one round.
+        \item The case in which we've examined every item but one and they've all been the same color and shape. By the definition of the problem, the last item must be the other and color and other shape.
+        \item The last case he explained is the case when we've "already found" a pair of different color and shape in which we're already done.
+      \end{itemize}
 
     \item
 
-      TODO: ANSWER 1(a)(ii) 
+      While I understand Michael's thought process, I thought his wording was not very good. The way he chose his cases for the exhaustive proof didn't feel complete or standard to say the least.
 
     \item
 
-      TODO: ANSWER 1(a)(iii)
+      After thinking more about it, I'm still not sure if this exhaustive proof covers every case. When I asked him about the case where you have 5 blues, 5 reds, 5 square and 5 circles, he pointed to his last case, saying it was the standard case. However, I don't think he ever really proved that case. I'm still not entirely sure as the wording and the way he went about the proof confused me.
 
     \end{enumerate}
     
+  \item % 1(b)
+
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 1(b)
+     
+    \begin{theorem}[Problem 1]
+     If $x = \log_9(12)$, then $x$ is irrational.
+    \end{theorem}
+    \begin{longFormProof}
+     \step By the definition of logs, we can say $x = \log_9(4*3) = \log_9(3) +
+             \log_9(4) = \frac{1}{2} + \log_9(4)$
+     
+     \smallskip
+     \hrulefill
+     \smallskip
+     
+           \begin{lemma}
+             Any rational plus an irrational will be an irrational number.
+           \end{lemma}
+     
+           \begin{longFormProof}[Proof of lemma.]
+             \begin{block}[blockL]
+                {Assume for contradiction rational + irrational = rational}
+             \step We can write the first rational as $a/b$ and the second as $c/d$
+                for some $a, b, c, d \in \mathbb{Z}$ so $a/b +$ irrational $=c/d$.
+             \step Subtracting $a/b$ from each side yields irrational $=c/d - a/b$
+             \step $c/d - a/b$ can be represented as the fraction $\frac{ad-bc}{bd}$, which is rational, contradicting a.
+             \end{block}
+             \step Therefore, a rational + an irrational = an irrational.
+           \end{longFormProof}
+     
+     \vspace*{-1em}
+     \hrulefill
+     \smallskip
+     
+     \step For $x$ to be rational, $y = \log_9(4)$ must be rational by Lemma 1.
+     \step $y = \log_9(4)$ can be rewritten as $9^y=4$.
+     \step Taking the square root of each side yields $3^y=2$.
+     \begin{block}[blockA]
+       {Assume for contradiction $y$ is rational, $y=p/q$ for some $p, q \in \mathbb{Z}$}
+       
+       \step we can rewrite $9^y=4$ as $3^{p/q}=2$ or $3^p=2^q$.
+     
+       \step $3^p$ will always be odd, while $2^p$ will always be even.
+            Therefore, there can't exist any $p, q \in \mathbb{Z}$ to satisfy this equation.
+     
+       \step By step 3.5, $p$ and $q$ cannot be integers. Therefore y is not rational by contradiction.
+     \end{block}
+     
+     \step By block~\ref{blockA}, and Lemma 1, $x$ cannot be rational
+        since it is made up of the sum of an irrational number, y.
+    \end{longFormProof}
+
   \item 
 
-    TODO: ANSWER 1(b) 
-
-  \item 
-
-    TODO: ANSWER 1(c)
+    In version 2.0, I've added a Lemma in an attempt to go deeper into my explanation. I fixed the wording that was talked about over iLearn. I also generally rewrote the entire proof with logic rules in mind in an attempt to make it more easily readable.\\
+    \tab My partner in class really didn't give me too much feedback. He told me he liked my proof and was sure it was complete.
 
   \end{enumerate}
 
@@ -58,7 +116,8 @@ Download this LaTeX file (along with \textsf{assignment-macros-0.tex}) to use as
     \begin{enumerate}
     \item
 
-      TODO: ANSWER 2(a)(i) 
+      I was skeptic for Kristen and then Sehoon.\\
+      \tab Kristen chose the 
 
     \item
 
@@ -72,10 +131,107 @@ Download this LaTeX file (along with \textsf{assignment-macros-0.tex}) to use as
     
   \item
 
-    TODO: ANSWER 2(b) 
+          \begin{theorem}[Problem 7]
+       (Handshakes after the party) $N + 1$ couples attend a dinner. At the end of the dinner, 
+        one person (Alice) asks each other person to write down the number of distinct people 
+        with whom he or she shook hands at the dinner. Surprisingly, all numbers, 
+        $0, 1, 2, ..., 2N$ are written down. Assuming that no person shook hands with their 
+        partner, how many people did Alice shake hands with at the dinner?
+      \end{theorem}
+
+      \begin{longFormProof}
+       \step Assume we have a party of $N + 1$ couples where indiduals have shaken 
+              hands with others but not with their own partner.
+       \step Call the individuals of one such couple Alice and Bob.
+       \step Assume that besides Alice, the number of hands shaken by each individual 
+            ($h(i)$ for some individual $i$) is a unique integer in the range $[0,2N]$.
+       \step By 3, there must exist an individual who's shaken hands with $2N$ other individuals.
+       \begin{block}[blockA]
+          {Assume for contradiction that Bob is the person who's shaken hands with $2N$ individuals.}
+
+          \step Besides Alice and Bob, there are $2N$ guests.
+          \step By 1, Bob cannot shake hands with Alice.
+          \step By 5.1 and 5.2, Bob must've shaken hands with everyone but Alice.
+          \step Handshaking is associative, so everyone but Alice has shaken hands with Bob.
+          \step Contradiction by 3, someone (besides Alice) must've shaken hands with no one, but everyone shook hands with Bob.
+       
+       \end{block}
+
+       \step By block~\ref{blockA}, Bob did not shake hands with $2N$ people.
+       
+       \smallskip
+       \hrulefill
+       \smallskip
+       
+             \begin{lemma}
+               Let $(x,y)$ be a couple neither of which are Alice, with $h(x)=2N$.  Then $h(y)=0$.
+             \end{lemma}
+       
+             \begin{longFormProof}[Proof of lemma.]
+               \begin{block}[blockL]
+                  {Assume for contradiction $h(y) \neq 0$.}
+
+                  \step since $h(x) = 2N$, $x$ cannot shake hands with y and there are $2N$ 
+                        people other than $x$ and $y$ at the party, we know x must’ve shaken 
+                        hands with everyone but $y$.
+                  \step Since hand shaking is associative, everyone but $y$ has shaken hands with $x$.
+                  \step $h(y) \neq 0$ by a, but no one else has shaken hands with 0 people 
+                        either, which is a contradiction by 3.
+               \end{block}
+                \step Therefore, if $h(x) = 2N$, it implies $h(y) = 0$.
+             \end{longFormProof}
+       
+       \vspace*{-1em}
+       \hrulefill
+       \smallskip
+       
+       \step By 3 and Lemma 1, there is some couple $(x,y)$ where $h(x)=2N, h(y)=0$.
+
+      \smallskip
+       \hrulefill
+       \smallskip
+       
+             \begin{lemma}
+               Removing $(x,y)$ from the party results in a new party that still adheres to the rules of 1-3 where Alice has shaken hands with 1 less person.
+             \end{lemma}
+       
+             \begin{longFormProof}[Proof of lemma.]
+                \step If we ignore the couple $(x,y)$, we're left with a party whose 
+                      handshakes now range in $[1,2N-1]$.
+                \step Besides $x$ and $y$, there are $2N$ other guests, meaning $x$ 
+                      must've shaken hands with each of them, while $y$ has shaken 
+                      hands with none of them.
+                \step Removing $x$ and $y$ from the party then reduces everyone else's handshake 
+                      number by 1, resulting in handshakes in the range $[0, 2N-2]$ or $[0, 2(N-1)]$.
+                \step Call $n = N-1$.
+                \step We now have a party of $n+1$ individuals, where still no individuals have 
+                      shaken hands with their own partners. Besides Alice, the number of hands 
+                      shaken by each individual is a unique integer in the range $[0,2n]$.
+                \step Alice's handshsakes have decreased 1 by c, and this new party still 
+                      adheres to 1-3 by e.
+             \end{longFormProof}
+       
+       \vspace*{-1em}
+       \hrulefill
+       \smallskip
+
+       \step Because we've started with a party that's valid by 1-3 and any removal of the couple $(a,b)$ where $h(a)=2N, h(b)=0$ will still result in a valid party, we can continue to remove this couple and create a new party, forcing Alice to shake one less hand each time.
+       \step We can repeat this process $N$ times, until Alice and Bob's couple is the only one left.
+       \step Since we can go through $N$ removals and by Lemma 2, a removal results in one less handshake for Alice, Alice must've shaken hands with $N$ people in the initial party.
+
+
+
+      \end{longFormProof}
 
   \item 
-    TODO: ANSWER 2(c) 
+    I left the first half of the proof the same as I felt it was fairly solid. I 
+    updated the wording of Lemma 1 in accordance with the iLearn comment. I also 
+    completely rewrote the back half of the proof in an attempt to make it more 
+    understandable. I established Lemma 2 and broke the whole process into more 
+    steps. In all honesty, it still feels like I'm lacking quite the right language 
+    to explain my thoughts entirely, but I'm happy with this.\\
+    \tab Because of a mixup with the homework, I brought the wrong assignment to 
+    class and didn't get skeptic feedback on this one.
 
   \end{enumerate}
 
