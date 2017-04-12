@@ -1,0 +1,73 @@
+\documentclass[11pt]{article}
+
+\input{assignment-macros-0}
+\usepackage{amssymb} %for empty set character
+
+\setTurnIn{???}
+\setAuthor{Stanley Cohen (scohe001)}
+\setSID{861114309}
+\setHeader
+
+\begin{document}
+
+\begin{problems}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 1
+ 
+\problem
+ 
+\begin{theorem}[Problem 1]
+ If $x = \log_9(12)$, then $x$ is irrational.
+\end{theorem}
+\begin{longFormProof}
+ \step By the definition of logs, we can say $x = \log_9(4*3) = \log_9(3) +
+         \log_9(4) = \frac{1}{2} + \log_9(4)$
+ 
+ \smallskip
+ \hrulefill
+ \smallskip
+ 
+       \begin{lemma}
+         Any rational plus an irrational will be an irrational number.
+       \end{lemma}
+ 
+       \begin{longFormProof}[Proof of lemma.]
+         \begin{block}[blockL]
+            {Assume for contradiction rational + irrational = rational}
+         \step We can write the first rational as $a/b$ and the second as $c/d$
+            for some $a, b, c, d \in \mathbb{Z}$ so $a/b +$ irrational $=c/d$.
+         \step Subtracting $a/b$ from each side yields irrational $=c/d - a/b$
+         \step $c/d - a/b$ can be represented as the fraction $\frac{ad-bc}{bd}$, which is rational, contradicting a.
+         \end{block}
+         \step Therefore, a rational + an irrational = an irrational.
+       \end{longFormProof}
+ 
+ \vspace*{-1em}
+ \hrulefill
+ \smallskip
+ 
+ \step For $x$ to be rational, $y = \log_9(4)$ must be rational by Lemma 1.
+ \step $y = \log_9(4)$ can be rewritten as $9^y=4$.
+ \step Taking the square root of each side yields $3^y=2$.
+ \begin{block}[blockA]
+   {Assume for contradiction $y$ is rational, $y=p/q$ for some $p, q \in \mathbb{Z}$}
+   
+   \step we can rewrite $9^y=4$ as $3^{p/q}=2$ or $3^p=2^q$.
+ 
+   \step $3^p$ will always be odd, while $2^p$ will always be even.
+        Therefore, there can't exist any $p, q \in \mathbb{Z}$ to satisfy this equation.
+ 
+   \step By step 3.5, $p$ and $q$ cannot be integers. Therefore y is not rational by contradiction.
+ \end{block}
+ 
+ \step By block~\ref{blockA}, and Lemma 1, $x$ cannot be rational
+    since it is made up of the sum of an irrational number, y.
+\end{longFormProof}
+ 
+\end{problems}
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

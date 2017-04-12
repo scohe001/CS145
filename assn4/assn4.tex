@@ -1,0 +1,67 @@
+\documentclass[11pt]{article}
+
+\input{assignment-macros-0}
+
+\setTurnIn{4}
+\setAuthor{Stanley Cohen (scohe001)}
+\setSID{861114309}
+\setHeader
+
+\begin{document}
+
+\begin{problems}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 1
+
+\problem
+
+\begin{theorem}[Checkerboard]
+  John has an 8x8 checkerboard and thirty-one 1x2 dominoes. John places the dominoes one by one 
+    on the checkerboard. He places each domino to cover exactly two adjacent, previously uncovered 
+    squares (two of the 64). When he is done, he has covered all but two of the squares. Is it 
+    possible that the two squares remaining uncovered are the two white corner squares?
+\end{theorem}
+\begin{longFormProof}
+  \begin{block}[blockA]
+    {Consider any state of the board after some number of domino placements.}
+    
+    \step We will show that John maintains the following invariant at all times:\\
+    \textit{The number of black squares covered is the same as the number of white squared covered.}
+
+    \step The invariant is initially true, when no squares are covered.
+
+    \begin{block}[blockB] 
+    {Consider any way that John can place a single domino.}
+
+      \begin{block}[blockC]
+      {Assume the invariant holds just before John places the domino.}
+
+        \step That is, just before the action, the number of uncovered white squares is the same as uncovered black squares.
+        \step Each possible action covers two adjacent squares--one black square and one white square.
+        \step Hence, the number of uncovered white and black squares always changes by (-1, -1) respectively.
+        \step Hence, their values remain equivalent and the invariant holds, after the action.
+
+      \end{block}
+
+      \step By block 1.3.1, if the invariant holds before the action, it holds after.
+
+    \end{block}
+
+    \step By block 1.3, for each action, if the invariant holds before the action, it holds after.
+    \step Since the invariant is initially true, and each of John's actions preserves it, the invariant holds.
+    \step The invariant also implies that the last two uncovered squares can never both be the same color.
+    \step It follows that the last two uncovered squares cannot be the two corner white squares.
+
+  \end{block}
+
+  \step By block~\ref{blockA}, after any sequence of actions that John might have taken, it is impossible for him to end with only the two white corners uncovered.
+\end{longFormProof}
+
+
+\end{problems}
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

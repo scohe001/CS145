@@ -1,0 +1,84 @@
+\documentclass[11pt]{article}
+
+\input{assignment-macros-0}
+
+\setTurnIn{???}
+\setAuthor{Stanley Cohen (scohe001)}
+\setSID{861114309}
+\setHeader
+
+\begin{document}
+
+\begin{problems}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 1
+ 
+\problem
+ 
+\begin{theorem}[Problem 1]
+ (Handshakes after the party) $N + 1$ couples attend a dinner. At the end of the dinner, 
+  oen person (Alice) asks each other person to write down the number of distinct people
+  with whom he or she shook hands at the dinner. Surprisingly, all numbers, $0, 1, 2,..., 2N$
+  are written down. Assuming that no person shook hands with their partner, how many people 
+  did Alice shake hands with at the dinner?
+\end{theorem}
+\begin{longFormProof}
+ \step Assume we have a party of $N + 1$ couples where indiduals have 
+        shaken hands with others but not with their own partner.
+ \step Call the individuals of one such couple Alice and Bob.
+ \step Assume that besides Alice, the number of hands shaken by each indivual ($h(i)$ for some individual $i$)
+        is a unique integer in the range $[0,2N]$.
+ \step By 3, there must exist an indidual who's shaken hands with $2N$ other individuals.
+ \begin{block}[blockA]
+  {Assume for contradiction that Bob is the person who's shaken hands with $2N$ individuals}
+    \step Besides Alice and Bob, there are $2N$ guests.
+    \step By 1, Bob cannot shake hands with Alice.
+    \step By 5.1 and 5.2, Bob must've shaken hands with everyone but Alice.
+    \step Handshaking is associative, so everyone but Alice has shaken hands with Bob.
+    \step Contradiction by 3, someone (besides Alice) must've shaken hands with no one, but everyone shook hands with Bob.
+ \end{block}
+
+ \step By block~\ref{blockA}, Bob did not shake hands with $2N$ people.
+
+ \smallskip
+ \hrulefill
+ \smallskip
+ 
+       \begin{lemma}
+         Given that a couple, $x,y$ where neither $x$ nor $y$ are Alice and $h(x)=2N$, it is implied $h(y)=0$.
+       \end{lemma}
+ 
+       \begin{longFormProof}[Proof of lemma.]
+         \begin{block}[blockB]
+            {Assume for contradiction that $h(y) \neq 0$}
+         \step since $h(x)=2N$, $x$ cannot shake hands with $y$ and there are $2N$ people other 
+              than $x$ and $y$ at the party, we know $x$ must've shaken hands with everyone but $y$.
+         \step Since hand shaking is associative, everyone but $y$ has shaken hands with $x$.
+         \step $h(y) \neq 0$ by a, but no one else has shaken hands with 0 people either, 
+              which is a contradiction by 3.\
+         \end{block}
+         \step Therefore, if $h(x)=2N$, $h(y)$ must be $0$.
+       \end{longFormProof}
+ 
+ \vspace*{-1em}
+ \hrulefill
+ \smallskip
+
+ \step By 3 and Lemma 1, there is some couple $x,y$ where $h(x)=2N, h(y)=0$.
+
+ \step By removing the $x,y$ couple, we are left with couples whose handshake numbers range in: $[1, 2N-1]$ 
+ \step If we remove this couple from the party, everyone will have shaken hands with one less person, since $x$ has shaken hands with everyone but $y$.
+ \step After all the handshake numbers are decremented we are left with people in the range $[0, 2N-2]$ or $[0, 2(N-1)]$ which is a problem that is smaller than the previous problem by one, but still conforms to 1-3.
+ \step By this process, we reduced the number of hands Alice had shaken by 1.
+ \step We can repeat this process $N$ times before the only couple left is Alice and Bob.
+ \step Thus, Alice shook hands with $N$ people, since we could reduce the problem $N$ times and each time would reduce the number of hands Alice had shaken by 1.
+ 
+\end{longFormProof}
+ 
+\end{problems}
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
