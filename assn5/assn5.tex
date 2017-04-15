@@ -1,0 +1,88 @@
+\documentclass[11pt]{article}
+
+\input{assignment-macros-0}
+
+% TODO: CHANGE NAME AND SID TO YOURS:
+
+\setTurnIn{5}
+\setAuthor{Stanley Cohen (scohe001)}
+\setSID{861114309}
+\setHeader
+
+\begin{document}
+
+% TODO: DELETE THIS LINE:
+Download this LaTeX file (along with \textsf{assignment-macros-0.tex}) to use as a template for turn-in \turnIn.
+
+% SEE assignment-template-0.tex FOR LATEX PROOF EXAMPLES.
+
+\begin{theorem}
+  A robot sits on an infinite 2-dimensional integer grid. The location of the robot at any time 
+  is given by a pair of integers $(i, j)$. The location is initially $(21, 15)$. At each time 
+  step, the robot moves as follows. If its current location is $(i,j)$, it moves to one of the 
+  two locations $(j, i - j)$ or $(j, i\cdot j)$. The robot can never reach a location $(i, j)$ where $i = 10$.
+\end{theorem}
+
+\begin{longFormProof}
+
+% Proof (short form). Consider any possible sequence S of moves by the robot. We will show
+% that S maintains the following invariant:
+% Each coordinate i and j of the robot’s location (i,j) is divisible by three.
+% Consider any move M in the sequence S, and suppose that the invariant holds before the move. Let (i,j) be the location just before the move. Since the invariant holds before the move, i and j are divisible by three. After the move, the location is (j, i · j) or (j, i − j). In either case, each coordinate is still divisible by three (because the product or difference of two multiples of three is also a multiple of three). It follows that, if the invariant holds before any move, it also holds after. That is, each move in S preserves the invariant.
+% The invariant holds at the start of the sequence S, because the robot is located at (21,15), and both 21 and 15 are divisible by three. Because the invariant holds at the start, and is preserved by each move, the invariant holds at the end of S. It follows that the location (i, j) at the end of S cannot have i = 10, because i is not divisible by three.
+
+  % step 1
+  \begin{block}[A]
+    {Consider any sequence of moves, $M$, made by the Robot.}
+
+    \step We will show the Robot maintains the following invariant at all times:
+    \begin{center}\textit{Each coordinate $i$ and $j$ of the Robot's location $(i, j)$ is odd.}\end{center}
+
+    \step The invariant is initially true when the Robot is located at $(21, 15)$.
+    \begin{block}[B]
+      {Consider some move in the sequence $M$. Call this move $m$.}
+
+      \begin{block}[C]
+        {Assume the invariant holds just before $m$.}
+
+        \begin{block}[D]
+          {Assume $m$ takes the robot to $(j, i - j)$.}
+
+          \step By 1.3.1 we know the invariant holds before $m$ is made, so $j$ and $i$ are odd.
+          \step Since $i$ and $j$ are odd, $j$ and $i-j$ will be odd. \hfill \textit{(need lemma for $i-j$ is odd?)}
+          \step That is, the coordinates of the new location of the Robot will be odd.
+
+        \end{block}
+
+        \begin{block}[E]
+          {assume $m$ takes the robot to $(j, i\cdot j)$.}
+
+          \step By 1.3.1 we know the invariant holds before $m$ is made, so $j$ and $i$ are odd.
+          \step Since $i$ and $j$ are odd, $j$ and $i\cdot j$ will be odd. \hfill \textit{(need lemma for $i\cdot j$ is odd?)}
+          \step That is, the coordinates of the new location of the Robot will be odd.
+
+        \end{block}
+
+        \step By block~\ref{D} and block~\ref{E}, regardless of which way $m$ takes the Robot, the new coordinates will be odd.
+        \step Hence, the invariant holds after the move $m$.
+
+      \end{block}
+
+      \step By block~\ref{C}, if the invariant holds before $m$, it holds after.
+
+    \end{block}
+
+    \step By block~\ref{B}, for each move in the sequence $M$, if the invariant holds before the move, it holds after.
+    \step Since the invariant is initially true, and each move in the sequence preserves it, the invariant holds.
+    \step The invariant also implies $i$ can never equal $10$ since $10$ is not odd.
+
+  \end{block}
+  \step By block~\ref{A}, after any sequence of moves the Robot might make, it is impossible for it to reach some coordinates $(i,j)$ where $i=10$.
+
+\end{longFormProof}
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
