@@ -1,0 +1,419 @@
+\documentclass[11pt]{article}
+
+\input{assignment-macros-0}
+
+\setTurnIn{???}
+\setAuthor{Stanley Cohen (scohe001)}
+\setSID{861114309}
+\setHeader
+
+\begin{document}
+
+\begin{problems}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 1
+
+\problem
+
+\begin{theorem}[page 12 of MCS]
+  If $0\le x \le 2$, then $-x^3 + 4x+1>0$.
+\end{theorem}
+\begin{longFormProof}
+  \begin{block}[blockA]
+    {Assume $x$ is an arbitrary real with $0\le x\le 2$.}
+    
+    \step Then $x$, $2-x$, and $2+x$ are each non-negative.
+
+    \step So, the product of these three terms is also non-negative.  That is,
+    \[ x(2-x)(2+x) \ge 0.\]
+
+    \step  Multiplying out the left-hand side gives \( -x^3 + 4x \ge 0 \).
+
+    \step Adding 1 to the both sides gives \( -x^3 + 4x + 1 \ge 1 > 0\).
+  \end{block}
+
+  \step By block~\ref{blockA}, if $0\le x\le 2$, then $-x^3+4x+1 > 0$.
+\end{longFormProof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 2
+
+\problem
+
+\begin{theorem}[page 13 of MCS]
+  If $r$ is irrational, then $\sqrt r$ is also irrational.
+\end{theorem}
+\begin{longFormProof}
+  \begin{block}[blockB]
+    {Assume for contradiction 
+      that there is an irrational number $r$
+      such that $\sqrt r$ is rational.}
+    
+    \step Since $\sqrt r$ is rational, $\sqrt r = p/q$ for integers $p$ and $q$. 
+
+    \step Squaring both sides, $r = (\sqrt r)^2 = (p/q)^2 = p^2/q^2$.  Hence $r$ is rational.
+
+    \step This contradicts that $r$ is irrational (line~\ref{blockB}).
+  \end{block}
+  
+  \step By block~\ref{blockB},
+  there does not exist an irrational number $r$
+  such that $\sqrt r$ is rational.
+
+  \step Equivalently, for every irrational number $r$,  $\sqrt r$ is also irrational.
+\end{longFormProof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 3
+
+\problem
+
+\begin{theorem}[page 14 of MCS]
+  The standard deviation of a sequence of numbers $x_1, x_2,\ldots, x_n$
+  is zero if and only if all values are equal to the mean.
+\end{theorem}
+\begin{longFormProof}
+  \begin{block}[blockC]
+    {Let $x_1,x_2,\ldots,x_n$ be an arbitrary sequence of numbers}
+    
+    \step[dev] 
+    Let $\mu=\sum_{i=1}^n x_i/n$ be the mean. 
+    Let $\sigma=\sqrt{\sum_{i=1}^n (x_i-\mu)^2/n}$ be the standard deviation.
+
+    
+    \begin{block}[blockC1]
+      {Assume the standard deviation is zero; that is, $\sigma=0$.}
+      
+      \step From the equation for $\sigma$ in  line~\ref{dev},
+      squaring both sides gives
+      $\sum_{i=1}^n (x_i-\mu)^2/n = 0$.
+
+      \step Each term in that sum (being a square) is non-negative.
+
+      \step And, since the sum of the terms is zero, each term must be zero:
+      $(x_i-\mu)^2/n = 0$ for all $i$.
+
+      \step It follows that $x_i = \mu$ for all $i$.  That is, all values are equal to the mean.
+    \end{block}
+    
+    \step[if] By block~\ref{blockC1},
+    if the standard deviation is zero, then all values are equal to the mean.
+
+    \begin{block}[blockC2]
+      {Assume all values are equal to the mean; that is, $x_i = \mu$ for all $i$.}
+
+      \step Inspecting line~\ref{dev}, each term in the sum is zero, so $\sigma=0$.
+    \end{block}
+    
+    \step[only if] By block~\ref{blockC2},
+    if all values are equal to the mean, then the standard deviation is zero.
+    
+    \step By lines~\ref{if} and~\ref{only if},
+    the standard deviation is zero if and only if each value equals the mean.
+  \end{block}
+\end{longFormProof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 4
+
+\problem
+
+  \begin{lemma}[from the proof-guide handout]\label{lemma: ave}
+    Let $x_1,x_2,\ldots,x_n$ be any finite, non-empty sequence of real numbers.
+    If their average equals their maximum
+    ($\sum_{i=1}^n x_i/n = \max_{i=1}^n x_i$),
+    then they are all equal.
+  \end{lemma}
+
+  \smallskip
+
+  Note: the high-level structure of the lemma is of the form
+  ``$\forall x\in S.~\text{if } A(x) \text{ then } B(x)$'',
+  where $S$ is the set of non-empty sequences of reals,
+  $A(x)$ is ``their average in $x$ equals the maximum'',
+  and $B(x)$ is ``all numbers in $x$ are equal''.
+
+  \begin{longFormProof}[First long-form proof.]
+    \begin{block}[block0]
+      {Assume $x_1, x_2,\ldots, x_n$ is an arbitrary finite, non-empty sequence of reals.
+      \hfill\emph{(set up ``to show $\forall$'')} }
+  
+      \step Let $M = \max_i x_i$ be their maximum.
+
+      \begin{block}[block1]
+        {Assume the average of the $x_i$'s equals $M$.
+        \hfill\emph{(set up ``if then'')}}
+
+        \begin{block}[block2]
+          {Assume $j$ is an arbitrary index in $\{1,2,\ldots,n\}$.
+          \hfill\emph{(set up ``to show $\forall$'')}}
+
+          \step By definition of the maximum, each $x_i$ is at most $M$, 
+          so, by algebra, the average (which equals $M$ by line~\ref{block1}),
+          is 
+          \[
+          M ~=~ \sum_{i=1}^n \frac{x_i}{n} ~\le~ (n-1) \frac{M}{n} + \frac{x_j}{n}. 
+          \]
+
+          \step Multiplying the left-hand and right-hand sides by $n$ and simplifying gives
+          \(
+          M \le x_j
+          \).
+  
+          \step This and (by definition of $M$) $x_j \le M$ yield $x_j = M$.
+        \end{block}
+
+        \step By block~\ref{block2}, $\forall j\in\{1,\ldots,n\}.~ x_j = M$.
+        So all the numbers are equal.
+        \hfill\emph{(by ``to show $\forall$'')}
+      \end{block}
+
+      \step By block~\ref{block1}, 
+      if the average of the $x_i$'s equals the maximum,
+      then all the numbers are equal.
+      \\\mbox{}\hfill\emph{(by ``if then'')}
+    \end{block}
+
+    \step By block~\ref{block0},
+    for any finite, non-empty sequence  $x_1, x_2,\ldots, x_n$ of reals,
+    if their average equals their maximum,
+    then they are all equal.
+    \hfill\emph{(by ``to show $\forall$'')}
+  \end{longFormProof}
+
+  \begin{longFormProof}[Alternative long-form proof.]
+    \begin{block}[block20]
+      {Assume for contradiction that the lemma is false ---
+      there exists a non-empty sequence of real numbers, not all equal,
+      whose average equals their maximum.
+      \hfill\emph{(set up  ``to show not $A$'')}}
+
+      \step[block21] Let $x_1, x_2,\ldots, x_n$ be such a sequence.
+      \hfill\emph{(by ``to use $\exists$'')}
+
+      \step Let $M = \max_i x_i$ be the maximum.
+
+      \step By definition of $M$, for each $i$, $x_i \le M$.
+
+      \step By the assumption that they are not all equal,
+      $\exists j\in\{1,2,\ldots,n\}.~x_j < M$.
+
+      \step[block22] Fix $j$ such that $x_j < M$.  
+      \hfill\emph{(``to use $\exists$'')}
+
+      \step Summing inequality $x_j < M$ and the inequalities $x_i \le M$ 
+      (for $i\ne j$) gives $\sum_{i=1}^n x_i < M n$.
+
+      \step Dividing by $n$ gives $\sum_{i=1}^n x_i/n < M$.  
+      That is, the average is less than the maximum.
+
+      \step This contradicts the assumption on line~\ref{block21}
+      \hfill\emph{(by ``to use not'')}
+    \end{block}
+
+    \step By block~\ref{block20}, the lemma is not false.
+    \hfill\emph{(by``to show not $A$'')}
+  \end{longFormProof}
+
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 5
+
+  \newpage
+
+  \problem
+
+  \begin{theorem}[from the proof-guide handout]
+    Let $G=(V,E)$ be any undirected, connected, finite graph,
+    where each vertex $v\in V$ has a numeric weight $w(v)$.
+    Suppose, for each vertex $v\in V$, the weight of $v$ equals
+    the average of the weights of its neighbors.
+    Then all vertex weights are the same.
+  \end{theorem}
+
+  \smallskip
+
+  Note: the high-level structure of the theorem is of the form
+  ``$\forall G\in S.~\text{if } A(G) \text{ then } B(G)$'',
+  where $S$ is the set of undirected, connected, finite graphs,
+  $A(G)$ is ``each vertex weight in $G$ equals the average of its neighbors weights'',
+  and $B(G)$ is ``all vertex weights in $G$ are the same''.
+  (Each of the properties $A(G)$ and $B(G)$ are, in turn,
+  of the form ``$\forall v\in G.~P(v)$'' for some property $P$.)
+
+  \begin{longFormProof}
+
+    \begin{block}[block30]
+      {Assume $G=(V,E)$ and $w$ give an arbitrary vertex-weighted graph as in the theorem.}
+
+      \begin{block}[block31]
+        {Assume that the weight of each vertex $v\in V$ 
+        equals the average of its neighbors' weights.}
+
+        \step Let $M = \max_{v\in V} w(v)$ be the maximum vertex weight.
+        ($M$ is well-defined, as $G$ is finite.)
+
+        \smallskip 
+        \hrulefill
+        \smallskip 
+
+        \begin{lemma}
+          Let $v^*$ be any vertex of maximum weight ($w(v^*)=M$).
+          Then all neighbors of $v^*$ also have weight $M$.
+        \end{lemma}
+
+        \begin{longFormProof}[Proof of lemma.]
+          \step By the choice of $M$, each neighbor's weight is at most $M$. 
+          \step By line~\ref{block31} and the choice of $v^*$,
+          the average of the neighbors' weights equals $M$.
+          \step So, applying Lemma~\ref{lemma: ave} to the neighbors' weights,
+          each neighbor's weight must be $M$.
+        \end{longFormProof}
+
+        \vspace*{-1em}
+        \hrulefill 
+        \smallskip
+
+        \begin{block}[block32]
+          {Assume $v'$ is an arbitrary vertex in $V$.  
+          Let $v^*$ be a vertex of maximum weight, $M$.}
+
+          \step Let $P=(v^*=v_1,v_2,\ldots,v_\ell=v')$ be a path from $v^*$ to $v'$. 
+          ($P$ exists, as $G$ is connected.)
+
+          \step By induction on $i=1,2,\ldots,\ell$, and the lemma,
+          each vertex $v_i$ on the path has weight $M$.
+
+          \step Hence, the weight of $v'$ equals $M$.
+        \end{block}
+  
+        \step It follows from block~\ref{block32} 
+        that every vertex $v\in V$ has weight $M$.
+        \hfill\emph{(by ``to show $\forall$'')}
+      \end{block} % block31
+  
+      \step It follows from block~\ref{block31} that,
+      if the weight of each vertex $v$ in $G$ equals the average of its neighbors' weights,
+      then all vertex weights are equal.
+      \hfill\emph{(by ``to show if then'')}
+    \end{block} % block30
+
+    \step It follows from block~\ref{block30} that, 
+    in any vertex-weighted graph as described in the theorem,
+    all vertex weights are equal.
+    \hfill\emph{(by ``to show $\forall$'')}
+
+  \end{longFormProof}
+
+  \begin{shortFormProof}
+    Let $G$ be as assumed in the theorem, 
+    with each vertex weight equal to the average of its neighbors' weights.
+    Let $M$ be the maximum vertex weight.
+    Consider any vertex $v$ of weight $M$.
+    The neighbors of $v$ must also have weight $M$,
+    because each has weight at most $M$, and their average is $M$.
+    By the same reasoning, the neighbors of the neighbors of $v$
+    also have weight $M$, and so on --- inductively, all vertices reachable from $v$
+    have weight $M$.
+    Since the graph is connected, all vertices are reachable from $v$,
+    so all vertices have weight $M$.
+  \end{shortFormProof}
+
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 6
+
+  \newpage
+
+  \problem
+
+  Assume that, given any two people, either they have met or not. 
+  If every pair in a group has met, call the group a \emph{club}. 
+  If every pair in a group has not met, call it a group of \emph{strangers}.
+
+  \begin{theorem}[from MCS page 15 and the proof-guide handout]
+    Every group of 6 people includes a club of 3 or a group of 3 strangers.
+  \end{theorem}
+
+  \begin{longFormProof}
+    \begin{block}[block40]
+      {Assume $C$ is an arbitrary collection of six people.
+        Let $x$ denote any one of the six people.
+
+        Say that $C$ is \emph{good} if $C$ includes a club of 3 or a group of 3 strangers.
+        We prove that $C$ is good.}
+
+      \begin{case}[case1]
+        {Assume that, among the five people other than $x$, at least three have met $x$.}
+
+        \begin{case}[case11]
+          {Suppose that no two among those three have met.}
+
+          \step Those three people are a group of strangers, 
+          so $C$ is good.
+        \end{case}
+
+        \begin{case}[case12]
+          {Suppose that some pair among those three have met.}
+
+          \step That pair, and $x$, have all met each other, so $C$ has a club of three, 
+          so $C$ is good.
+        \end{case}
+
+        \step Within case~\ref{case1}, case~\ref{case11} or~\ref{case12} must hold;
+        $C$ is good in each,
+        so $C$ is good in case~\ref{case1}.
+      \end{case}
+      
+      \begin{case}[case2]
+        {Assume that, among the five people other than $x$, 
+        at least three have not met $x$.}
+
+        \begin{case}[case21]
+          {Suppose that every pair among those three have met.}
+      
+          \step Those three are a club, so $C$ is good.
+        \end{case}
+
+        \begin{case}[case22]
+          {Suppose that some pair among those three have not met.}
+
+          \step That pair, and $x$, have all not met, so form a group of three strangers, 
+          so $C$ is good.
+        \end{case}
+
+        \step  Within case~\ref{case2}, case~\ref{case21} or~\ref{case22} must hold;
+        $C$ is good in each, 
+        so $C$ is good in case~\ref{case2}.
+      
+      \end{case}
+
+      \step Case~\ref{case1} or~\ref{case2} must hold (verify!);
+      $C$ is good in each,
+      so $C$ is good.
+    \end{block}
+
+    \step By block~\ref{block40}, every group of 6 people is good,
+    that is, includes a club of 3 or a group of 3 strangers.
+  \end{longFormProof}
+  
+  \begin{shortFormProof}
+    Fix any one of the six people.  Call that person $x$.
+    \begin{description}
+    \item[Case 1.] Suppose that, among the five people other than $x$, 
+      at least three have met $x$.
+
+      If no two among those other three have met, 
+      then those three are a group of three strangers,  so we are done.
+      Otherwise, some pair among those three have met.
+      That pair, together with $x$, form a club of three, so we are done.
+
+    \item[Case 2.] Otherwise, among the five people other than $x$, 
+      at least three have not met $x$.
+      The reasoning in this case is symmetric:
+      If no pair among those three have met, then those three are a club,
+      so we are done.
+      Otherwise, some pair among those three have not met.
+      That pair, together with $x$, are a group of three strangers.
+    \end{description}
+  \end{shortFormProof}
+\end{problems}
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

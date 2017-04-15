@@ -1,0 +1,75 @@
+\documentclass[11pt]{article}
+
+\input{assignment-macros-0}
+\usepackage{amssymb} %for empty set character
+
+\setTurnIn{???}
+\setAuthor{Stanley Cohen (scohe001)}
+\setSID{861114309}
+\setHeader
+
+\begin{document}
+
+\begin{problems}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 1
+
+\problem
+
+\begin{theorem}[Problem 1]
+  If $x = \log_9(12)$, then $x$ is irrational.
+\end{theorem}
+\begin{longFormProof}
+  \step By the definition of logs, we can say $x = \log_9(3) + \log_9(4) = \frac{1}{2} + \log_9(4)$
+  \step For $x$ to be rational, $y = \log_9(4)$ must be rational
+  \begin{block}[blockA]
+    {Assume $y$ is rational, $y=p/q$ for some $p, q \in \mathbb{Z}$}
+    
+    \step Then $p/q = \log_9(4)$
+
+    \step By the definition of logs, $9^{p/q} = 4$
+
+    \step Taking each side to the power of q yields $9^p = 4^q$
+
+    \step Taking the square root of each side yields $3^p = 2^q$
+
+    \step $3^p$ will always be odd, while $2^p$ will always be even. Therefore, there can't exist any $p$ or $q$ to satisfy this equation.
+
+    \step By step 3.5, $y$ cannot equal $p/q$. Therefore y is not rational by contradiction.
+  \end{block}
+
+  \step By block~\ref{blockA}, x cannot be rational since it is made up of the sum of an irrational number, y.
+\end{longFormProof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 2
+
+\problem
+
+\begin{theorem}[Problem 4]
+  In a set of objects, each is either ed or blue, and each is either round or square. There is at least one red object, at least one blue object, at least one round object, and at least one square object. There exist two objects that are different both in color and in shape.
+\end{theorem}
+\begin{longFormProof}
+  \step Let $S$ be the set of all sets of objects that contain at least one red object, one blue object, one round object and one square object.
+  \begin{block}[blockB]
+    {Assume for contradiction that there is a set of objects, $C \in S$ where there do not exist two objects that are different in both color and shape.}
+    
+    \step Split $C$ into two subsets by color, red objects in $R$ and blue objects in  $B$ so that $R \cup B = C$ and $R \cap B = \emptyset$.
+
+    \step Assume we have a red square in $R$. There then must be only blue squares in $B$, meaning there can be no red circles in $R$. This means we have no circles at all, which means $C \not\in S$, contradiction.
+
+    \step Assume we have a red circle in $R$. There then must be only blue circles in $B$, meaning there can be no red squares in $R$. This means we have no squares at all, which means $C \not\in S$, contradiction.
+
+  \end{block}
+  
+  \step By block~\ref{blockB},
+  there does not exist a set $C \in S$ where there are no two objects that are different in both color and shape.
+
+  \step Equivalently, for every $C \in R$, we can find two objects that differ in both color and shape.
+\end{longFormProof}
+\end{problems}
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
