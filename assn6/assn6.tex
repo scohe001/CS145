@@ -1,0 +1,113 @@
+\documentclass[11pt]{article}
+
+\input{assignment-macros-1}
+
+% TODO: CHANGE NAME AND SID TO YOURS:
+
+\setTurnIn{6}  
+
+% \setTurnIn{7} % uncomment this line for turn-in 7
+
+\setAuthor{Stanley Cohen (scohe001)}
+\setSID{861114309}
+\setHeader
+
+\begin{document}
+
+% TODO: DELETE THIS LINE:
+Download this file (along with \textsf{assignment-macros-1.tex}) as a template for turn-in 6 or 7.
+
+\renewcommand{\problem}[1]{\item[\textbf{Problem #1}]}
+
+\begin{problems}
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+  \problem{2}~
+
+  \lineacross 
+
+  \begin{steps}
+    \step For each pair $(i,j)$ in $\langle (1,1), (1,2), (2,1), (2,2), (2,3), (3,2), (3,3) \rangle$, do:
+
+    \begin{steps}
+      \step Match every boy/girl pair where the boy is the girl's $i$th choice,
+      the girl is the boy's $j$th choice, and the boy and girl are not yet matched.
+    \end{steps}
+
+    \step Return the resulting matching.
+  \end{steps}
+  
+  \lineacross
+
+  While clever, this algorithm fails to take into account any case where a stable matching requires a first choice to be matched with a last choice. Take for example the following boy/girl preferences:
+
+  $$\mathbf{B_1} \rightarrow G_1, G_2, G_3 \hspace{1cm} \mathbf{G_1} \rightarrow B_1, B_2, B_3$$
+  $$\mathbf{B_2} \rightarrow G_1, G_2, G_3 \hspace{1cm} \mathbf{G_2} \rightarrow B_1, B_2, B_3$$
+  $$\mathbf{B_3} \rightarrow G_3, G_1, G_2 \hspace{1cm} \mathbf{G_3} \rightarrow B_1, B_2, B_3$$
+
+  The first run through the algorithm will attempt to match any pairs who are both each other's first choices. We get the match $(B_1,G_1)$.
+
+  The next few runs land no hits until the $(2,2)$ round. Here we'll get the match $(B_2,G_2)$.
+
+  Even though we still have an unmatched boy and girl, the algorithm will run all the way through without matching them 
+  and return the matching of $\{(B_1,G_1), (B_2,G_2)\}$ which is clearly not stable as not even every boy and girl are matched.
+
+  \textit{(I know I'm only supposed to be turning in one problem here and I would've just done problem 3, but I wanted some 
+  feedback on this one. I found what I believe to be a counterexample, so do I still need a longform proof? Also is this a 
+  valid counterexample or am I misunderstanding how their algorithm works? Thanks!)}
+
+  \lineacross
+
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\problem{3}~
+
+  \lineacross 
+
+  \begin{lemma}
+    In any execution of the stable-marriage algorithm (from the handout),
+    there is a girl who is not proposed to until the last round.
+  \end{lemma}
+
+  \begin{longFormProof}
+
+    \begin{block}[A]
+      {Consider any execution of the algorithm.}
+
+      \begin{block}[B1]    % so \ref{B1} will give the line number for this step
+        {Assume for contradiction that the lemma is false.}
+
+        \step That is, every girl has been proposed to and the algorithm continues running.
+
+        \step Once a girl has been proposed to, she remains matched for the remainder of the algorithm.
+
+        \step Since every girl has been proposed to, every girl is matched.
+
+        \step Since the number of boys and girls is the same and each girl can match to no more than 1 boy, every boy is also matched.
+
+        \step Contradiction. By the definition of the algorithm, it will stop once every boy is matched.
+
+      \end{block}
+
+      \step By block~\ref{B1} when every girl has been proposed to, the algorithm ends.
+
+      \step That is, there is a girl who is not proposed to until the last round.
+    \end{block}
+
+    \step By block~\ref{A} there is a girl who is not proposed to until the last round for any run of the algorithm.
+
+  \end{longFormProof}
+
+  \begin{shortFormProof}
+    Take any run of the algorithm. Assume for contradiction you've had proposals to every girl and continue running the algorithm. Once a girl has been proposed to, she will be matched for the rest of the run. If every girl is matched, every boy is also matched. Contradiction, the algorithm stops running when every boy is matched, so you cannot continue running after every girl has been proposed to. Thus, there is a girl who is not proposed to until the last round for any run of the algorithm.
+  \end{shortFormProof}
+
+\end{problems}
+
+\end{document}
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
