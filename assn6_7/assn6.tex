@@ -1,0 +1,112 @@
+\documentclass[11pt]{article}
+
+\input{assignment-macros-1}
+
+% TODO: CHANGE NAME AND SID TO YOURS:
+
+\setTurnIn{6}  
+
+% \setTurnIn{7} % uncomment this line for turn-in 7
+
+\setAuthor{Stanley Cohen (scohe001)}
+\setSID{861114309}
+\setHeader
+
+\begin{document}
+
+\renewcommand{\problem}[1]{\item[\textbf{Problem #1}]}
+
+\begin{problems}
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+  \problem{2}~
+
+  \lineacross 
+
+  \begin{steps}
+    \step For each pair $(i,j)$ in $\langle (1,1), (1,2), (2,1), (1, 3), (3, 1), (2,2), (2,3), (3,2), (3,3) \rangle$, do:
+
+    \begin{steps}
+      \step Match every boy/girl pair where the boy is the girl's $i$th choice,
+      the girl is the boy's $j$th choice, and the boy and girl are not yet matched.
+    \end{steps}
+
+    \step Return the resulting matching.
+  \end{steps}
+  
+  \lineacross
+
+  While clever, this algorithm fails when those who get there third choices in two $(3, 1), (1, 3)$ 
+  couples are each other's second choices. Take for example the following boy/girl preferences:
+
+  $$\mathbf{B_1} \rightarrow G_1, G_3, G_2 \hspace{1cm} \mathbf{G_1} \rightarrow B_3, B_2, B_1$$
+  $$\mathbf{B_2} \rightarrow G_3, G_1, G_2 \hspace{1cm} \mathbf{G_2} \rightarrow B_2, B_1, B_3$$
+  $$\mathbf{B_3} \rightarrow G_3, G_1, G_2 \hspace{1cm} \mathbf{G_3} \rightarrow B_3, B_1, B_2$$
+
+  The first run through the algorithm will attempt to match any pairs who are both each other's first choices. We get the match $(B_3,G_3)$.
+
+  The next few runs land no hits until the $(1,3)$ round. Here we'll get the match $(B_2,G_2)$.
+
+  In the next round we look to match $(3, 1)$, so we'll get $(B_1, G_1)$
+
+  Overall we get the matching: $\{(B_1, G_1), (B_2, G_2), (B_3, G_3)\}$. However, there's an unstable pair, $(B_2, G_1)$, making this whole matching unstable.
+
+  \lineacross
+
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\problem{3}~
+
+  \lineacross 
+
+  \begin{lemma}
+    In any execution of the stable-marriage algorithm (from the handout),
+    there is a girl who is not proposed to until the last round.
+  \end{lemma}
+
+  \begin{longFormProof}
+
+    \begin{block}[A]
+      {Consider any execution of the algorithm.}
+
+      \begin{block}[B1]    % so \ref{B1} will give the line number for this step
+        {Assume for contradiction that the lemma is false for this execution.}
+
+        \step That is, every girl has been proposed to when we begin the final iteration of the algorithm.
+
+        \step Once a girl has been proposed to, she remains matched for the remainder of the algorithm.
+
+        \step Since every girl has been proposed to, every girl is matched.
+
+        \step Since the number of boys and girls is the same and each girl can match to no more than 1 boy, every boy is also matched.
+
+        \step Contradiction. By the definition of the algorithm, it should've stopped when every boy was matched, 
+              but we're about to start the final iteration.
+
+      \end{block}
+
+      \step By block~\ref{B1} the lemma holds for this run of the algorithm.
+
+    \end{block}
+
+    \step By block~\ref{A} there is a girl who is not proposed to until the last round for any run of the algorithm.
+
+  \end{longFormProof}
+
+  \begin{shortFormProof}
+    Take any run of the algorithm. Assume for contradiction you've had proposals to every girl when you are 
+    entering the last iteration. Once a girl has been proposed to, she will be matched for the rest of the run. 
+    If every girl is matched, every boy is also matched. Contradiction, the algorithm stops running when every 
+    boy is matched, so you cannot continue running after every girl has been proposed to. Thus, there is a girl 
+    who is not proposed to until the last round for any run of the algorithm.
+  \end{shortFormProof}
+
+\end{problems}
+
+\end{document}
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
