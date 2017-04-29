@@ -1,0 +1,146 @@
+\documentclass[11pt]{article}
+
+\input{assignment-macros-2}
+
+% TODO: CHANGE NAME AND SID TO YOURS:
+
+\setTurnIn{9}  
+
+\setAuthor{Stanley Cohen (scohe001)}
+\setSID{861114309}
+\setHeader
+
+\begin{document}
+
+\begin{problems}
+
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+
+  \problem % problem 1
+
+  \begin{lemma}
+    For any boy-optimal stable matching $M$ for any instance $I$,  $M$ is girl-pessimal.
+  \end{lemma}
+  \begin{longFormProof}
+    \begin{block}[A]
+      {Consider any instance $I$ and boy-optimal stable matching $M$.}
+
+      \begin{block}[A1]
+        {Suppose for contradiction that $M$ is not girl-pessimal.}
+
+        \step Let $(b,g)\in M$ be a matched couple where $b$ is not $g$'s least-preferred possible partner. 
+
+        \step Let $b'$ be the least-preferred possible partner of $g$.
+
+        \step Let $M'$ be a stable matching in which $(b',g)$ are a couple.
+
+        \step $b$ must prefer $g$ to his partner in $M'$, since $g$ is his best possible partner.
+
+        \step Likewise, since $b'$ is $g$'s least preferred possible partner, $g$ prefers $b$ to $b'$.
+
+        \step Thus, $(b, g)$ is an unstable pair in $M'$.
+
+        \step Contradiction by 1.1.3., $M'$ is not a stable matching.
+      \end{block}
+
+      \step By block~\ref{A1}, $M$ is girl-pessimal. 
+    \end{block}
+
+    \step By block~\ref{A}, for any boy-optimal stable matching $M$ for any instance $I$,
+    $M$ is girl-pessimal. 
+
+  \end{longFormProof}
+
+  \begin{shortFormProof}
+    Assume for contradiction that we have some stable boy optimal matching $M$ on some instance 
+    that is not girl pessimal. That is, there is some $(b, g)\in M$ where $g$ is paired with 
+    a less preferred boy, $b'$ in some other stable matching, $M'$. However, $g$ is $b$'s most 
+    preferred possible choice, and $g$ prefers $b$ to $b'$, so $(b, g)$ is an unstable pair in $M'$. 
+    Therefore $M'$ cannot be stable, contradiction. Thus any boy optimal matching $M$ is also girl pessimal.
+  \end{shortFormProof}
+
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+
+  \newpage 
+  \problem  % PROBLEM 2
+
+  \begin{enumerate}
+  \item[(a)] First problem.
+    
+  \item[(b)] Original: 
+
+
+    \begin{align*}
+    \text{maximize } &x_1 + 2x_2\\
+    \text{subject to } &2x_1 + x_2 \leq 10\\
+    & x_1 + 3x_2 \leq 9\\
+    & x_1, x_2 \geq 0.
+    \end{align*}
+
+
+    Dual:
+
+    \begin{align*}
+    \text{minimize } &10a + 9b\\
+    \text{subject to } &2a + b \geq 1\\
+    & a + 3b \geq 2\\
+    &a, b \geq 0.
+    \end{align*}
+
+    \smallskip
+    
+  \item[(c)] % What is the optimal solution to the dual linear program?
+    The optimal solution is $(a,b)=(1/5, 3/5)$, with value $37/5$. (found graphically).
+  \end{enumerate}
+
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+
+  \medskip
+  
+  \problem  % PROBLEM 3
+
+  \begin{enumerate}
+  \item[(a)] Second Problem
+    
+  \item[(b)] Original: 
+
+
+    \begin{align*}
+    \text{minimize } &x_1 + 3x_2 + 5x_3\\
+    \text{subject to } &x_1 + x_2 + x_3 \geq 1\\
+    & x_1, x_2, x_3 \geq 0.
+    \end{align*}
+
+
+    Dual:
+
+    \begin{align*}
+    \text{maximize } &a\\
+    \text{subject to } &a \leq 1\\
+    & a \leq 3\\
+    &a \leq 5\\
+    &a \geq 0.
+    \end{align*}
+
+    These can be rewritten as simply:
+
+    \begin{align*}
+    \text{maximize } &a\\
+    \text{subject to } &0 \leq a \leq 1\\
+    \end{align*}
+
+    \smallskip
+
+  \item[(c)] Especially here in the dual, it becomes blindingly obvious that our optimal solution will be $a=1$ with a value of $1$.
+  \end{enumerate}
+
+\end{problems}
+
+\end{document}
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
