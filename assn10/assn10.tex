@@ -1,0 +1,95 @@
+\documentclass[10pt]{article}
+
+\input{assignment-macros-2}
+
+% TODO: CHANGE NAME AND SID TO YOURS:
+
+\setTurnIn{10}  
+
+\setAuthor{Stanley Cohen (scohe001)}
+\setSID{861114309}
+\setHeader
+
+\begin{document}
+
+\begin{problems}
+
+  \problem
+  
+  \setcounter{lemma}{1}
+  \begin{lemma}
+    An edge $e$ is critical iff $f(e) = \text{cap}(e)$ in every maximum flow $f$.
+  \end{lemma}
+
+  \begin{longFormProof}
+
+    \begin{block}[B]
+      {Consider any $s$-$t$ flow network $G$ and edge $e$.
+
+      \lineacross }
+      
+      \step First we will prove that, if $f(e) \ne \text{cap}(e)$ in some maximum flow $f$, then $e$ is not critical.
+
+      \smallskip 
+      
+      \begin{block}[B1]
+        {Assume that there exists max-flow $f$ such that $f(e) \ne \text{cap}(e)$.}
+
+        \step Let $\epsilon = \text{cap}(e) - f(e) > 0$.  (Using here that $f(e) \le \text{cap}(e)$ and $f(e)\ne\text{cap}(e)$.)
+
+        \step Let $G'$ be the graph obtained by reducing the capacity of $e$ by $\epsilon$.
+
+        \step Since the flow through $e$ in $G$ is less than or equal to the capacity of $e$ in $G'$, 
+              the flow through $e$ in each graph can still be $f(e)$.
+
+        \step That is, the maximum flow in $G'$ is the same as that in $G$.
+
+        \step So $e$ is not critical.
+      \end{block}
+
+      \step[B2] By block~\ref{B1}, if $f(e) \ne \text{cap}(e)$ in some maximum flow $f$,
+      then $e$ is not critical.
+
+      \smallskip 
+
+      \lineacross 
+
+      \step Next we will prove that, if $f(e) = \text{cap}(e)$ in every maximum flow $f$, then $e$ is critical.
+
+      \smallskip 
+      
+      \begin{block}[B3]
+        {Assume there exists some $e$ such that in every max-flow $f$,  $f(e) = \text{cap}(e)$.}
+
+        \step Let $\epsilon>0$. (Reducing the capacity of $e$ by any $\epsilon$ should reduce the max flow by the definition of ``critical'').
+
+        \step Since in every maximum flow, $f(e) = \text{cap}(e)$, reducing the capacity 
+              of $e$ by $\epsilon$ will reduce the maximum flow by $\epsilon$
+
+        \step So $e$ is critical.
+      \end{block}
+
+      \step[B4] By block~\ref{B3}, if $f(e) \ne \text{cap}(e)$ in some maximum flow $f$,
+      then $e$ is not critical.
+
+      \smallskip
+
+      \lineacross 
+    
+      \step By lines~\ref{B2} and~\ref{B4},
+      $e$ is critical iff $f(e) = \text{cap}(e)$ in every maximum flow $f$ in $G$.
+    \end{block}
+
+    \step By block~\ref{B},
+    for any edge $e$ in any flow network,
+    $e$ is critical iff $f(e) = \text{cap}(e)$ in every max flow $f$ in $G$.
+  \end{longFormProof}
+
+\end{problems}
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
