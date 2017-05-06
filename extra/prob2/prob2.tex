@@ -27,7 +27,7 @@
 
     \step We can prove this by induction on N.  Consider the base case N=1.
 
-    \step To move one disc to any other peg at minimum will take 1 move.
+    \step[S1] To move one disc to any other peg at minimum will take 1 move.
       
     \step That is, when $N = 1$, the theorem holds.
 
@@ -41,17 +41,25 @@
       \begin{block}[B]
         {Consider any legal sequence for moving $k+1$ discs from $P_0$ to $P_1$.}
 
-        \step At some point during this sequence, we must move the bottom disc (the $k+1$ disc) to $P_1$.
+        \step To accomplish this, the bottom disc (the $k+1$ disc) must make its way from $P_0$ to $P_1$.
+
+        \step Consider the first time the $k+1$ disc is moved.
 
         \step By the definition of the problem, we can only move the top disc of any stack, and we cannot place it on any smaller disc.
 
-        \step Thus to move the $k+1$ disc to $P_1$, the other $k$ discs cannot be on top of it or on $P_1$.
+        \step Thus to move the $k+1$ disc, the other $k$ discs cannot be on top of it or on a post it's moving to.
 
-        \step That is, to move the $k+1$ disc to $P_1$, we must first stack the other $k$ discs on a post that is not $P_1$ or the post the $k+1$ disc is on.
+        \step That is, to move the $k+1$ disc, we must first stack the other $k$ discs on a post that is not $P_0$.
 
         \step By 4.1, moving the $k$ discs to another post will take at least $2^k-1$ moves.
 
-        \step Moving the $k+1$ disc to the target post will take at least $1$ move.
+        \step[S2] Moving the $k+1$ disc to any other post post will take at least $1$ move.
+
+        \step Now consider the problem state when the $k+1$ disk is set on $P_1$.
+
+        \step At minimum, this is the same move from step~\ref{S2}
+
+        \step By the definition of the problem, the other $k$ discs must all be stacked on a post that is not $P_1$.
 
         \step Moving the $k$ discs to the target post will take at least $2^k-1$ moves.
 
