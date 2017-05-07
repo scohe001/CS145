@@ -1,0 +1,135 @@
+\documentclass[10pt]{article}
+
+\input{assignment-macros-2}
+
+% TODO: CHANGE NAME AND SID TO YOURS:
+
+\setTurnIn{11}  
+
+\setAuthor{YOUR NAME HERE}
+\setSID{YOUR SID HERE}
+\setHeader
+
+\begin{document}
+
+\begin{problems}
+
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+
+  \problem % problem 1
+
+  \includegraphics{graph}
+
+  {\vskip 0.1in \noindent\bf Maximum flows:}
+
+    We can get a maximum flow of 9 by giving the edges in the graph the following flows:\\
+    $f(s, v) = 5,\\
+     f(s, u) = 4,\\
+     f(v, w) = 2,\\
+     f(v, z) = 2,\\
+     f(v, u) = 1,\\
+     f(u, w) = 1,\\
+     f(u, z) = 4,\\
+     f(z, t) = 4,\\
+     f(z, w) = 2,\\
+     f(w, t) = 5\\$
+
+  {\vskip 0.1in \noindent\bf Minimum cuts:}
+
+    There are a few minimum cuts for this problem. You could cut the set of edges $\{(s, v), (s, u)\}$ for a cost of 9, 
+        or you could cut $\{(s, u), (v, w), (v, u), (v, z)\}$ for a cost of 9.
+
+  {\vskip 0.1in \noindent\bf Critical edges:}
+
+    Critical edges here are all in the set $\{(s, v), (s, u), (v, w), (v, u), (v, z)\}$
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+
+  \newpage 
+
+  \problem % problem 2
+
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+
+  \setcounter{lemma}{1}
+  \begin{lemma}
+    An edge $e$ is critical if and only if $f(e) = \text{cap}(e)$ in every maximum flow $f$.
+  \end{lemma}
+
+  \begin{longFormProof}
+
+    \begin{block}[B]
+      {Consider any $s$-$t$ flow network $G$ and edge $e$.
+
+      \lineacross }
+      
+      \step First we will prove that, if $f(e) \ne \text{cap}(e)$ in some maximum flow $f$, then $e$ is not critical.
+
+      \smallskip 
+      
+      \begin{block}[B1]
+        {Assume that there exists max-flow $f$ such that $f(e) \ne \text{cap}(e)$.}
+
+        \step Let $\epsilon = \text{cap}(e) - f(e) > 0$.  (Using here that $f(e) \le \text{cap}(e)$ and $f(e)\ne\text{cap}(e)$.)
+
+        \step Let $G'$ be the graph obtained by reducing the capacity of $e$ by $\epsilon$.
+
+        \step $\text{cap}(e)$ in $G'$ is greater than or equal to $f(e)$ in $G$.
+
+        \step Therefore, the max flow, $f$ in $G$ is also feasible in $G'$.
+
+        \step So $e$ is not critical.
+      \end{block}
+
+      \step[B2] By block~\ref{B1}, if $f(e) \ne \text{cap}(e)$ in some maximum flow $f$,
+      then $e$ is not critical.
+
+      \smallskip 
+
+      \lineacross 
+
+      \step Next we will prove that, if $e$ is not critical, then $f(e) \ne \text{cap}(e)$ in some maximum flow.
+
+      \smallskip 
+
+      \begin{block}[B3]
+        {Assume that $e$ is not critical in $G$.}
+
+        \step[S1] Let $\epsilon>0$ be such that reducing the capacity of $e$ by $\epsilon$ does not reduce the maximum flow value.  (Such an $\epsilon$ exists by the definition of ``critical'').
+
+        \step Let $G'$ be the graph obtained by reducing the capacity of $e$ by $\epsilon$.
+
+        \step By the definition of a critical edge, $G'$ will have the same maximum flow value as $G$.
+
+        \step That is, the maximum flow in $G'$ could be applied to $G$ and $f(e)$ would be $\text{cap}(e) - \epsilon$.
+
+        \step There is a max flow $f$ in $G$ with $f(e) \ne \text{cap}(e)$.
+      \end{block}
+      
+      \step[B4] By block~\ref{B3}, if $e$ is not critical, then there exists a maximum flow $f$ in $G$
+      with $f(e) \ne \text{cap}(e)$.
+
+      \smallskip
+
+      \lineacross 
+    
+      \step By lines~\ref{B2} and~\ref{B4},
+      $e$ is critical if and only if $f(e) = \text{cap}(e)$ in every maximum flow $f$ in $G$.
+    \end{block}
+
+    \step By block~\ref{B},
+    for any edge $e$ in any flow network,
+    $e$ is critical iff $f(e) = \text{cap}(e)$ in every max flow $f$ in $G$.
+  \end{longFormProof}
+
+\end{problems}
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
