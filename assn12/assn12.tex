@@ -1,0 +1,111 @@
+\documentclass[10pt]{article}
+
+\input{assignment-macros-2}
+
+% TODO: CHANGE NAME AND SID TO YOURS:
+
+\setTurnIn{12}  
+
+\setAuthor{YOUR NAME HERE}
+\setSID{YOUR SID HERE}
+\setHeader
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+
+% LEMMA 1
+
+% IF YOU ARE GOING TO PROVE LEMMA 1, USE THE PART BELOW
+% OTHERWISE DELETE IT AND USE THE FOLLOWING PART
+
+\begin{lemma}
+  An edge $e$ is critical if and only if there exists a minimum-capacity cut containing $e$.
+\end{lemma}
+
+\begin{longFormProof}
+
+  \begin{block}[A]
+    {Consider any $s$-$t$ flow network $G$ and edge $e$.}
+
+    \step Let $c_{\min}$ be the minimum capacity of any $s-t$ cut in $G$.
+
+    \step By the max-flow/min-cut theorem, the maximum $s-t$ flow value in $G$ is $c_{\min}$. 
+
+    \smallskip
+
+    \lineacross
+    
+    \step First we will prove that, if no minimum cut contains $e$, then $e$ is not critical. 
+
+    \begin{block}[A1]
+      {Assume that no minimum-capacity cut contains $e$.}
+
+      \step That is, the value of any cut that contains $e$ will be a loose upper bound for the max $s-t$ flow value in $G$.
+
+      \step Therefore, there exists some $\epsilon > 0$ where $e$ can be reduced by $\epsilon$ 
+              and all cuts with $e$ will still not be minimum capacity cuts. 
+
+      \step That is, the upper bound on the maximum $s-t$ flow in $G$ will not change.
+
+      \step So by definition $e$ is not critical.
+    \end{block}
+    
+    \step[A2] By block~\ref{A1}, if no minimum-capacity cut contains $e$, then $e$ is not critical.
+
+    \smallskip 
+    
+    \lineacross 
+
+    \step Next we will prove that, if some minimum-capacity cut contains $e$, then $e$ is critical. 
+
+    \begin{block}[A3]
+      {Suppose that some minimum-capacity cut $C$ (of capacity $c_{\min}$) contains $e$.}
+
+      \step We will show that $e$ is critical.  
+
+      \smallskip
+      
+      \begin{block}[A31]
+        {Consider any $\epsilon>0$.}
+
+        \step Let $G'$ be the flow network obtained from $G$ by reducing the capacity of $e$ by $\epsilon$.
+
+        \step Call the minimum cut $C$ in $G'$, $C'$ of value $c'_{\min}$.
+
+        \step $c'_{\min} < c_{\min}$ since the value of $e$ has been reduced.
+
+        \step By definition every cut is an upper bound on the max $s-t$ flow through some graph.
+
+        \step Since we have a cut in $G'$ whose value is less than any minimum cut in $G$, the max $s-t$ flow of $G'$ is strictly less than that of $G$.
+
+        \step That is, reducing $e$'s capacity by $\epsilon$ reduces the max flow.
+      \end{block}
+
+      \medskip 
+
+      \step By block~\ref{A31}, for all $\epsilon>0$,
+      reducing $e$'s capacity by $\epsilon$ reduces the max flow.
+      That is, $e$ is critical.
+    \end{block}
+    
+    \step[A4] By block~\ref{A3}, if some minimum-capacity cut contains $e$, then $e$ is critical.
+    
+    \smallskip 
+
+    \lineacross 
+
+    \step By lines~\ref{A2} and~\ref{A4}, $e$ is critical if and only if $e$ is on some minimum-capacity cut. 
+  \end{block}
+
+  \step By block~\ref{A}, for any edge $e$ in any flow network, $e$ is critical iff $e$ is on some minimum-capacity cut. 
+\end{longFormProof}
+
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
