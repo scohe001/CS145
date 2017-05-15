@@ -1,0 +1,63 @@
+\documentclass[11pt]{article}
+
+\input{assignment-macros-2}
+
+\setTurnIn{extra 4}
+\setAuthor{Stanley Cohen (scohe001)}
+\setSID{861114309}
+\setHeader
+
+\begin{document}
+
+\begin{problems}
+
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 5
+
+  \newpage
+
+  \problem
+
+  \begin{theorem}[Tower of Hanoi]
+      You are given a subset $S$ of $\{1,2,...,100\}$ with the following property:
+        for every quadruple $u,v,w,x$ of distinct numbers in $S$, the sum of $u$ and $v$ 
+        differs from the sum of $w$ and $x$.  Must the size of $S$ be at most fifteen?
+        Prove your answer.
+  \end{theorem}
+
+  \smallskip
+
+  \begin{longFormProof}
+
+    \begin{block}[A]
+      {Assume we have some valid set, $S$ of size 15.}
+
+      \step By definition, for any quadruple of distinct numbers $u,v,w,x \in S$, $u + v \neq w + x$.
+
+      \step In other words, $u - w \neq x - v$.
+
+      \step That is, given any two pairs, the differences between the pairs must differ.
+
+      \step Consider solely pairs made of consecutively numbers in $S$ (when $S$ is sorted in ascending order).
+
+      \step We can make 14 pairs of these consecutive numbers, each of which must have a unique difference.
+
+      \step At minimum, The differences between the pairs will be in the set $\{1, 2,..., 14\}$.
+
+      \step However, $\sum_{n=1}^{14} n = 105$, which means that the largest number in $S$ has a lower bound of 106 (since we started at 1 not 0).
+
+      \step This is a contradiciton since every number in $S$ must be in the set $\{1,2,...,100\}$.
+
+    \end{block}
+
+    \step By block~\ref{A}, the size of $S$ cannot be 15.
+    
+  \end{longFormProof}
+
+
+\end{problems}
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
