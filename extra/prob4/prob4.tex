@@ -17,7 +17,7 @@
 
   \problem
 
-  \begin{theorem}[Tower of Hanoi]
+  \begin{theorem}[All pairs have different sums]
       You are given a subset $S$ of $\{1,2,...,100\}$ with the following property:
         for every quadruple $u,v,w,x$ of distinct numbers in $S$, the sum of $u$ and $v$ 
         differs from the sum of $w$ and $x$.  Must the size of $S$ be at most fifteen?
@@ -28,28 +28,59 @@
 
   \begin{longFormProof}
 
-    \begin{block}[A]
-      {Assume we have some valid set, $S$ of size 15.}
+    \step Consider any valid set $S$ in ascending order with $n$ items.
 
-      \step By definition, for any quadruple of distinct numbers $u,v,w,x \in S$, $u + v \neq w + x$.
+    \step By definition, for any quadruple of distinct numbers, $u, v, w, x; u + v \neq w + x$.
 
-      \step In other words, $u - w \neq x - v$.
+    \step[A] Rearranging the equation, $u - w \neq x - v$.
 
-      \step That is, given any two pairs, the differences between the pairs must differ.
+    \step If we look at the biggest item in $S$, item $n$, it will create $n-1$ positive differences with the other $n-1$ numbers.
 
-      \step Consider solely pairs made of consecutively numbers in $S$ (when $S$ is sorted in ascending order).
+    \step By step~\ref{A}, the positive differences created by looking at the $(n-1)^\text{th}$ 
+            item must not be the same as those with the $n^\text{th}$ item (with the exception 
+            of the difference between the $n^\text{th}$ and $(n-1)^\text{th}$).
 
-      \step We can make 14 pairs of these consecutive numbers, each of which must have a unique difference.
+    \step That is, the second biggest number will create $(n-2)-1$ new positive differences.
 
-      \step At minimum, The differences between the pairs will be in the set $\{1, 2,..., 14\}$.
+    \step For a set $S$ of $n$ items, the lower bound for positive differences will be 
+              $$(n-1) + (((n-2)-1) + ((n-3)-1) + ((n-4)-1) + \cdots + 1) = \frac{n\cdot (n-1)}{2} - n - 1$$
 
-      \step However, $\sum_{n=1}^{14} n = 105$, which means that the largest number in $S$ has a lower bound of 106 (since we started at 1 not 0).
+    \step The differences for any $S$ must be a subset of $\{1, 2,...,99\}$.
 
-      \step This is a contradiciton since every number in $S$ must be in the set $\{1,2,...,100\}$.
+    \step That is, at most any set $S$ will contain $99$ differences.
 
-    \end{block}
+    \step The greatest $n$ we can plug in to give us a value less than $99$ is $15, \frac{15\cdot (15-1)}{2} - 15 - 1 = 91$.
 
-    \step By block~\ref{A}, the size of $S$ cannot be 15.
+    \step Therefore, size $15$ is the upper bound for any $S$.
+
+    %\step However, if we plug in $16$ for $n$, we get $\frac{16\cdot (16-1)}{2} - 16 - 1 = 105 > 99$, meaning that an $S$ with size $16$ is infeasible.
+
+    %%%%%%%%%%%%%%%%%%
+    %%%%%%%%%%%%%%%%%%
+    %%%%%%%%%%%%%%%%%%
+
+    % \begin{block}[A]
+    %   {Assume we have some valid set, $S$ of size 15.}
+
+    %   \step By definition, for any quadruple of distinct numbers $u,v,w,x \in S$, $u + v \neq w + x$.
+
+    %   \step In other words, $u - w \neq x - v$.
+
+    %   \step That is, given any two pairs, the differences between the pairs must differ.
+
+    %   \step Consider solely pairs made of consecutively numbers in $S$ (when $S$ is sorted in ascending order).
+
+    %   \step We can make 14 pairs of these consecutive numbers, each of which must have a unique difference.
+
+    %   \step At minimum, The differences between the pairs will be in the set $\{1, 2,..., 14\}$.
+
+    %   \step However, $\sum_{n=1}^{14} n = 105$, which means that the largest number in $S$ has a lower bound of 106 (since we started at 1 not 0).
+
+    %   \step This is a contradiciton since every number in $S$ must be in the set $\{1,2,...,100\}$.
+
+    % \end{block}
+
+    % \step By block~\ref{A}, the size of $S$ cannot be 15.
     
   \end{longFormProof}
 
