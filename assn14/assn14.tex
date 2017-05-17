@@ -1,0 +1,60 @@
+\documentclass[10pt]{article}
+
+\input{assignment-macros-2}
+
+% TODO: CHANGE NAME AND SID TO YOURS:
+
+\setTurnIn{14}  
+
+\setAuthor{Stanley Cohen (scohe001)}
+\setSID{861114309}
+\setHeader
+
+\begin{document}
+
+\emph{The problems for this assignment will use the following graph, $G$}
+
+\includegraphics[scale=0.5]{graph}
+
+\begin{problems}
+
+  \problem
+
+  Here is an optimal solution vector, $X$ for the primal LP for shortest paths from $A$ to $E$ in $G$:
+
+  $(x_{AB}, x_{AC}, x_{BC}, x_{CB}, x_{BD}, x_{BE}, x_{CD}, x_{CE}, x_{ED}) = (0,1,0,1,0,1,0,0,0)$ Yielding an optimal value of 6.
+
+  \medskip 
+  \problem
+  Here is an optimal solution vector, $\pi$, for the dual LP for shortest paths from $A$ to $E$ in $G$:
+
+  $(\pi_A, \pi_B, \pi_C, \pi_D, \pi_E) = (0, 3, 2, 5, 6)$ Yielding an optimal value of 6.
+  
+  \medskip 
+  \problem
+
+\begin{lemma}
+  The dual solution $\pi$ above is optimal.
+\end{lemma}
+
+\emph{I'm doing the first two for turn-in 14, but what's to stop me from just doing this for turn-in 15? 
+      I'm not sure what it is you're looking for here.}
+
+\begin{longFormProof}
+
+      \step We know from solving the primal that the optimal value for the length of the shortest path from $A$ to $E$ in $G$ is 6.
+
+      \step By the definition of strong duality, since we found a solution to the dual with the same optimal value, this must be the optimal solution.
+
+      \step QED.
+
+\end{longFormProof}
+
+\end{problems}
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
