@@ -4,7 +4,7 @@
 
 % TODO: CHANGE NAME AND SID TO YOURS:
 
-\setTurnIn{14}  
+\setTurnIn{14-15}  
 
 \setAuthor{Stanley Cohen (scohe001)}
 \setSID{861114309}
@@ -37,17 +37,13 @@
   The dual solution $\pi$ above is optimal.
 \end{lemma}
 
-\emph{I'm doing the first two for turn-in 14, but what's to stop me from just doing this for turn-in 15? 
-      I'm not sure what it is you're looking for here.}
-
 \begin{longFormProof}
 
-      \step We know from solving the primal that the optimal value for the length of the shortest path from $A$ to $E$ in $G$ is 6.
+    \step By problem 1, we know that 6 is a feasible solution to the primal LP.
 
-      \step By the definition of strong duality, since we found a solution to the dual with the same optimal value, this must be the optimal solution.
+    \step Therefore, by weak duality, every feasible solution to the dual has value at most 6.
 
-      \step QED.
-
+    \step Since we've found a feasible solution, $\pi$ to the dual equal to the upper bound, $\pi$ must be optimal.
 \end{longFormProof}
 
 \end{problems}
