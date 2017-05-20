@@ -42,12 +42,26 @@
     \begin{block}[A1]
       {Assume that no minimum-capacity cut contains $e$.}
 
-      \step That is, the value of any cut that contains $e$ will be a loose upper bound for the max $s-t$ flow value in $G$.
+      \begin{block}[A11]
+        {Take some cut, $c$, that contains $e$.}
 
-      \step Therefore, there exists some $\epsilon > 0$ where $e$ can be reduced by $\epsilon$ 
-              and all cuts with $e$ will still not be minimum capacity cuts. 
+        \step By \ref{A1}, $c$ is not a minimum cut.
 
-      \step That is, the upper bound on the maximum $s-t$ flow in $G$ will not change.
+        \step That is, the value of $c$ is a loose upper bound for the max $s-t$ flow value in $G$.
+
+        \step Therefore, there exists some $\epsilon > 0$ where $e$ can be reduced by $\epsilon$ and the value of
+                $c$ will still be greater than any minimum cut.
+
+        \step The amount of flow coming into the cut is unchanged after $e$ is reduced.
+
+        \step The amount of flow leaving the cut is strictly greater than the max flow of 
+                the whole graph since this still isn't a minimum cut after $e$ is reduced.
+
+        \step Therefore, the max flow of $G$ is unchanged after $e$ is reduced.
+
+      \end{block}
+
+      \step In every cut with $e$, there exists some $\epsilon$ where $e$ can be reduced by $\epsilon$ and still not change the max flow in $G$.
 
       \step So by definition $e$ is not critical.
     \end{block}
@@ -72,13 +86,15 @@
 
         \step Let $G'$ be the flow network obtained from $G$ by reducing the capacity of $e$ by $\epsilon$.
 
-        \step Call the minimum cut $C$ in $G'$, $C'$ of value $c'_{\min}$.
+        \step Consider the flow passing through $C$ in $G'$.
 
-        \step $c'_{\min} < c_{\min}$ since the value of $e$ has been reduced.
+        \step The amount of flow coming into $C$ is the same in $G$ as in $G'$.
 
-        \step By definition every cut is an upper bound on the max $s-t$ flow through some graph.
+        \step However, the capacity of $C$ in $G'$ is less than $c_{min} = \text{max flow of }G$.
 
-        \step Since we have a cut in $G'$ whose value is less than any minimum cut in $G$, the max $s-t$ flow of $G'$ is strictly less than that of $G$.
+        \step In other words, the flow leaving $C$ in $G'$ is strictly less than the maximum flow of the graph $G$.
+
+        \step Therefore, the max flow of $G'$ must be less than that of $G$.
 
         \step That is, reducing $e$'s capacity by $\epsilon$ reduces the max flow.
       \end{block}
