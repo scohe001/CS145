@@ -1,0 +1,62 @@
+\documentclass[11pt]{article}
+
+\input{assignment-macros-2}
+
+\setTurnIn{extra 5}
+\setAuthor{Stanley Cohen (scohe001)}
+\setSID{861114309}
+\setHeader
+
+\begin{document}
+
+\begin{problems}
+
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 5
+
+  \newpage
+
+  \problem
+
+  \begin{theorem}[All pairs have different sums]
+      Prove or disprove: It is possible to label each square of an 8 x 8 checkerboard with an integer, 
+      so that no two squares are labeled with the same integer and no two adjacent squares 
+      (up, down, left, right) have labels that differ by 8 or more.
+  \end{theorem}
+
+  \smallskip
+
+  \begin{longFormProof}
+
+    \begin{block}[A]
+      {Assume you have filled some chessboard with integers to satisfy the theorem.}
+
+      \step Construct a set $S$ of chessboard squares by doing the following...
+
+      \step Add the square with the smallest integer not in $S$ into $S$, stopping when the squares in $S$ are touching at least $8$ squares not in $S$.
+
+      \step Call $T$ the set of chessboard squares adjacent to those in $S$ but not in $S$.
+
+      \step Call the largest numbered square in $S$, $s$, where the number in $s$ is $num(s)$.
+
+      \step Since there are $8$ squares in $T$ and the numbers in the squares in $T$ must be unique integers $> num(s)$, the lower bound on the largest numbered square in $T$ will be $num(s) + 8$.
+
+      \step However, by the definition of the theorem, there is no square in $S$ that the largest square in $T$ can be adjacent to.
+
+      \step Contradiction.
+
+    \end{block}
+    
+    \step By block~\ref{A} you cannot fill a chessboard with integers to satisfy the theorem.
+
+    \step That is, the theorem is false.
+    
+  \end{longFormProof}
+
+
+\end{problems}
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
