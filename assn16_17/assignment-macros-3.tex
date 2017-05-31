@@ -1,0 +1,137 @@
+\usepackage{xifthen}% \isempty
+\usepackage{stringstrings}% \substring
+
+\usepackage{nameref}
+\makeatletter
+\newcommand*{\currentlabel}{\@currentlabel}
+\makeatother
+
+\usepackage{amsmath, amsthm, amssymb}
+\usepackage{fullpage}
+\usepackage[colorlinks=false,urlcolor=blue,pageanchor=true]{hyperref}
+\usepackage{xspace}
+\usepackage{graphicx}
+\usepackage[normalem]{ulem}
+\usepackage{enumitem}
+\usepackage{adjustbox}
+
+\newtheorem{lemma}{Lemma}
+\newtheorem{definition}{Definition}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}
+\newtheorem{claim}{Claim}
+
+\newcommand{\E}{\operatorname{E}}
+\newcommand{\giv}{\,|\,}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Zp}{\mathbb{Z}_{\ge 0}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Rp}{\mathbb{R}_{\ge 0}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Np}{\mathbb{N}_{\ge 0}}
+
+\newcommand{\OP}[1]{\text{\small\sc #1}\xspace}
+\newcommand{\Insert}{\OP{Insert}}
+\newcommand{\FindMin}{\OP{Find-Min}}
+\newcommand{\DeleteMin}{\OP{Delete-Min}}
+\newcommand{\DecreaseKey}{\OP{Decrease}}
+\newcommand{\Merge}{\OP{Merge}}
+\newcommand{\Cut}{\OP{Cut}}
+\newcommand{\prob}[1]{\text{\textsc{#1}}}
+\newcommand{\encode}[1]{\langle #1 \rangle}
+
+\setlength{\parskip}{2pt}
+% \setlength{\parindent}{0in}
+
+\setlength\fboxsep{0pt}
+\newlist{steps}{enumerate}{9}
+\setlist[steps]{wide,label*=\arabic*.,topsep=1pt,parsep=1pt,partopsep=1pt,itemsep=0pt, labelindent=2pt}%
+\setlist[steps,1]{ref=\arabic*}
+\setlist[steps,2]{ref=\arabic{stepsi}.\arabic*}
+\setlist[steps,3]{ref=\arabic{stepsi}.\arabic{stepsii}.\arabic*}
+\setlist[steps,4]{ref=\arabic{stepsi}.\arabic{stepsii}.\arabic{stepsiii}.\arabic*}
+\setlist[steps,5]{ref=\arabic{stepsi}.\arabic{stepsii}.\arabic{stepsiii}.\arabic{stepsiv}.\arabic*}
+\setlist[steps,6]{ref=\arabic{stepsi}.\arabic{stepsii}.\arabic{stepsiii}.\arabic{stepsiv}.\arabic{\stepsv}.\arabic*}
+\setlist[steps,7]{ref=\arabic{stepsi}.\arabic{stepsii}.\arabic{stepsiii}.\arabic{stepsiv}. \arabic{\stepsv}.\arabic{\stepsvi}.\arabic*}
+\setlist[steps,8]{ref=\arabic{stepsi}.\arabic{stepsii}.\arabic{stepsiii}.\arabic{stepsiv}. \arabic{\stepsv}.\arabic{\stepsvi}.\arabic{\stepsvii}.\arabic*}
+\setlist[steps,9]{ref=\arabic{stepsi}.\arabic{stepsii}.\arabic{stepsiii}.\arabic{stepsiv}. \arabic{\stepsv}.\arabic{\stepsvi}. \arabic{\stepsvii}.\arabic{\stepsviii}.\arabic*}
+
+\newlist{asteps}{enumerate}{6}
+\setlist[asteps]{wide,topsep=1pt,parsep=1pt,partopsep=1pt,itemsep=0pt, labelindent=1em}%
+\setlist[asteps,1]{
+  label=\alph*.,
+  ref=\alph*
+}
+\setlist[asteps,2]{
+  label=\alph{astepsi}.\arabic*.,
+  ref=\alph{astepsi}.\arabic*
+}
+\setlist[asteps,3]{
+  label=\alph{astepsi}.\arabic{astepsii}.\arabic*.,ref=\alph{astepsi}.\arabic{astepsii}.\arabic*
+}
+\setlist[asteps,4]{
+  label=\alph{astepsi}.\arabic{astepsii}.\arabic{astepsiii}.\arabic*.,
+  ref=\alph{astepsi}.\arabic{astepsii}.\arabic{astepsiii}.\arabic*
+}
+\setlist[asteps,5]{
+  label=\alph{astepsi}.\arabic{astepsii}.\arabic{astepsiii}.\arabic{astepsiv}.\arabic*.,
+  ref=\alph{astepsi}.\arabic{astepsii}.\arabic{astepsiii}.\arabic{astepsiv}.\arabic*
+}
+\setlist[asteps,6]{
+  label=\alph{astepsi}.\arabic{astepsii}.\arabic{astepsiii}.\arabic{astepsiv}.\arabic{\astepsv}.\arabic*.,
+  ref=\alph{astepsi}.\arabic{astepsii}.\arabic{astepsiii}.\arabic{astepsiv}.\arabic{\astepsv}.\arabic*
+}
+
+\newlist{problems}{enumerate}{9}
+\setlist[problems]{wide, label=\textbf{Problem \arabic*},topsep=1pt,parsep=1pt,partopsep=1pt,itemsep=0pt, labelindent=0pt}%
+
+\newcommand{\STEPS}{steps}
+\newcommand{\SHIFT}{\renewcommand{\SHIFT}{\renewcommand{\STEPS}{asteps}}}
+
+\newcommand{\maybeLabel}[1]{\ifthenelse{\isempty{#1}}{}{\label{#1}}}
+\newcommand{\maybeItem}[1]{\ifthenelse{\isempty{#1}}{\item}{\item[#1]}}
+
+\newcommand{\problem}[1][]{\maybeItem{#1}~\par}
+
+\newenvironment{longFormProof}[1][Proof (long form).]
+{\SHIFT\begin{proof}[#1]~\par\begin{\STEPS}}{\end{\STEPS}\vspace*{-1ex}\end{proof}}
+
+\newenvironment{shortFormProof}[1][Proof (short form).]
+{\SHIFT\begin{proof}[#1]}{\end{proof}}
+
+% \makeatletter
+% \newcommand{\caseitem}{\@sitem}
+% \newcommand{\@sitem}{%
+%   \refstepcounter{\@enumctr}%
+%   \item[\textbullet~\csname label\@enumctr\endcsname]}
+% \makeatother
+
+\newcommand{\step}[1][]{\item\maybeLabel{#1}}
+
+\newcommand{\comment}[1]{\hfill{\footnotesize\emph{#1}}}
+
+\newcommand{\lineacross}{\par\vspace*{-0.7\baselineskip}\noindent\hrulefill\par}
+
+\newenvironment{block}[2][]
+{\step[#1]  #2 \begin{\STEPS}}{\end{\STEPS}}
+
+\newenvironment{case}[2][]
+{\step[#1] (case \currentlabel) \emph{#2}\begin{\STEPS}}{\end{\STEPS}}
+
+\newcommand{\setHeader}{\markboth
+{\footnotesize CS 145 turn-in \turnIn, \today, by \author, \SID}
+{\footnotesize CS 145 turn-in \turnIn, \today, by \author, \SID}}
+
+\newcommand{\setTurnIn}[1]{\newcommand{\turnIn}{#1}}
+\newcommand{\setAuthor}[1]{\renewcommand{\author}{#1}}
+\newcommand{\setSID}[1]{\newcommand{\SID}{#1}}
+
+\pagestyle{myheadings}
+\addtolength{\headsep}{0.3in}
+\addtolength{\topmargin}{-0.4in}
+\addtolength{\textheight}{0.4in}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "assignment-template"
+%%% End:
