@@ -3,7 +3,7 @@
 \input{assignment-macros-3}
 
 
-\setTurnIn{16}  
+\setTurnIn{17}  
 
 \setAuthor{Stanley Cohen (scohe001)}
 \setSID{861114309}
@@ -17,68 +17,64 @@
   % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
   % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 
-  % \problem % problem 1
+  \problem % problem 1
 
-  % Given an instance $\encode{G=(V,E),k}$ of \prob{Independent Set},
-  % the reduction outputs the instance $\encode{n, D, p, i}$ of \prob{ECD},
-  % where $n$, $D$, $p$, and $i$ are defined as follows:
+  Given an instance $\encode{G=(V,E),k}$ of \prob{Independent Set},
+  the reduction outputs the instance $\encode{n, D, p, i}$ of \prob{ECD},
+  where $n$, $D$, $p$, and $i$ are defined as follows:
 
-  % \lineacross 
+  \lineacross 
 
-  % DESCRIBE YOUR REDUCTION HERE 
+  Let $D$ be the $VxV$ matrix constructed by the following steps. Fill the the matrix with zeroes. 
+    For every edge in $G$, $V_iV_j \in E$, change $D_{i,j} = .01$.
 
-  % \lineacross 
+  The reduced ECD will be of the form $\encode{|V|, D, 0, k}$
 
-  % \medskip 
-  % Here is why the reduction can be computed in polynomial time:
+  \lineacross 
+
+  \medskip 
+  Here is why the reduction can be computed in polynomial time:
   
-  % \lineacross 
+  \lineacross 
 
-  % EXPLAIN WHY $\encode{n, D, p, i}$ CAN BE COMPUTED IN POLYNOMIAL TIME GIVEN $\encode{G,k}$
+  Given any Graph, to construct the reduced ECD only requires a loop through the edge set to setup the matrix. 
+    This should be linear which is easily polynomial.
 
-  % \lineacross 
+  \lineacross 
   
-  % \medskip 
-  % Here is a proof that the reduction is correct.
-  % \begin{lemma}
-  %   Given any instance $\encode{G,k}$ of \prob{Independent Set},
-  %   let $\encode{n, D, p, i}$ be the instance of \prob{ECD} produced by the reduction.
-  %   Then $G$ has an independent set of size $k$
-  %   if and only if there is a set of $i$ ingredients that have total discord at most $p$.
-  % \end{lemma}
-  % \begin{longFormProof}
-  %   \step First we show the ``only if'' direction.
-  %   \begin{block}[1oi]
-  %     {Assume that $G$ has an independent set of size $k$.}
-  %     \step Let $I$ be an independent set of size $k$ in $G$.
-  %     \bigskip 
-
-  %     \emph{\ldots Somehow show that, since $I$ exists in $G$,
-  %       there must be a set $S$ of $i$ ingredients that have total discord at most $p$\ldots}
-
-  %     \bigskip 
-  %     \step There is a set of $i$ ingredients that have total discord at most $p$.
-  %   \end{block} 
-  %   \step Next we show the ``if'' direction.
-  %   \begin{block}[1i]
-  %     {Assume there is a set of at least $i$ ingredients that have total discord at most $p$.}
-  %     \step Let $S$ be a set of at $i$ ingredients that have total discord at most $p$.
-  %     \bigskip 
-
-  %     \emph{\ldots Somehow show that, since $S$ exists,
-  %       there must be an independent set $I$ of size $k$ in $G$\ldots}
-
-  %     \bigskip 
-  %     \step There is an independent set of size $k$ in $G$. 
-  %   \end{block} 
-  %   \step By blocks~\ref{1oi} and~\ref{1i},
-  %   $G$ has an independent set of size $k$
-  %   if and only if there is a set of $i$ ingredients that have total discord at most $p$.
-  % \end{longFormProof}
+  \medskip 
+  Here is a proof that the reduction is correct.
+  \begin{lemma}
+    Given any instance $\encode{G,k}$ of \prob{Independent Set},
+    let $\encode{n, D, p, i}$ be the instance of \prob{ECD} produced by the reduction.
+    Then $G$ has an independent set of size $k$
+    if and only if there is a set of $i$ ingredients that have total discord at most $p$.
+  \end{lemma}
+  \begin{longFormProof}
+    \step First we show the ``only if'' direction.
+    \begin{block}[1oi]
+      {Assume that $G$ has an independent set of size $k$.}
+      \step Let $I$ be an independent set of size $k$ in $G$.
+      \step That is, for any $V_j, V_k \in I$, $V_jV_k \notin E$.
+      \step Therefore, for any $V_k, V_k \in I$ in the Independent Set problem, $D_{j,k} = 0$ in the matrix for the reduced EDC problem.
+      \step There is a set of $i$ ingredients that have total discord at most $p$.
+    \end{block} 
+    \step Next we show the ``if'' direction.
+    \begin{block}[1i]
+      {Assume there is a set of at least $i$ ingredients that have total discord at most $p$.}
+      \step Let $S$ be a set of at $i$ ingredients that have total discord at most $p$.
+      \step That is, for every pair of ingredients, $I_j, I_k \in S$, in the matrix, $D_{j,k} = 0$.
+      \step This means in the independent set graph, there is no edge between $V_jV_k$.
+      \step Therefore there is an independent set of size $k$ in $G$. 
+    \end{block} 
+    \step By blocks~\ref{1oi} and~\ref{1i},
+    $G$ has an independent set of size $k$
+    if and only if there is a set of $i$ ingredients that have total discord at most $p$.
+  \end{longFormProof}
 
   % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-  % \newpage
+  \newpage
   \problem % problem 2
 
   Given an instance $\encode{G=(V,E)}$ of \prob{Directed Ham Cycle},
@@ -114,7 +110,10 @@
 
       \step That is, there is some order the vertices can be visited, $v_1, v_2, ..., v_n, v_1$ where all are unique except the first and last and all edge used are unique.
 
-      \step Then $G'$ will have the Hamiltonian cycle, ${v_1}^1, {v_1}^2, {v_1}^3, {v_2}^1, {v_2}^2, {v_2}^3, ..., {v_n}^1, {v_n}^2, {v_n}^3, {v_1}^1$.
+      \step Then $G'$ will a cycle, ${v_1}^1, {v_1}^2, {v_1}^3, {v_2}^1, {v_2}^2, {v_2}^3, ..., {v_n}^1, {v_n}^2, {v_n}^3, {v_1}^1$.
+
+      \step This will be a Hamiltonian cycle since all of these nodes are unique except the first and last and all 
+            nodes in the graph are contained in the cycle.
 
     \end{block} 
     \step Next we show the ``if'' direction.
@@ -122,10 +121,12 @@
       {Assume that $G'$ has an undirected Hamiltonian cycle.}
       \step Let $C'$ be such a cycle.
 
-      \step Every ${v_i}^1, {v_i}^2, {v_i}^3$ gizmo must be visited either from 
-            ${v_i}^1\rightarrow{v_i}^2\rightarrow{v_i}^3$ or ${v_i}^3\rightarrow{v_i}^2\rightarrow{v_i}^1$.
+      \step $C'$ must visit every node in the graph.
 
-      \step The only way to move directly from one gizmo, $v_i$ to another, $v_j$ will be via the edge ${v_i}^3{v_j}^1$.
+      \step In any ${v_i}^1, {v_i}^2, {v_i}^3$ gizmo, ${v_i}^2$ must be visited either in the form 
+            ${v_i}^1\rightarrow{v_i}^2\rightarrow{v_i}^3$ or ${v_i}^3\rightarrow{v_i}^2\rightarrow{v_i}^1$ since it has two edges.
+
+      \step The only way to move directly from one gizmo, $v_i$ to another, $v_j$ will be via the edge ${v_i}^3{v_j}^1$ or ${v_i}^1{v_j}^3$.
 
       \step Therefore, if one gizmo is visited $1\rightarrow2\rightarrow3$, they all will be and vice versa.
 
@@ -142,61 +143,86 @@
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 
-  % \newpage
-  % \problem % problem 3
+  \newpage
+  \problem % problem 3
 
-  % Given an instance $\encode{G=(V,E)}$ of \prob{Directed Ham Cycle},
-  % the reduction outputs the instance $\encode{\Phi}$ of \prob{SAT}, defined as follows:
+  Given an instance $\encode{G=(V,E)}$ of \prob{Directed Ham Cycle},
+  the reduction outputs the instance $\encode{\Phi}$ of \prob{SAT}, defined as follows:
   
-  % \lineacross 
-  % DESCRIBE YOUR REDUCTION HERE
-  % \lineacross 
+  \lineacross 
+  \textit{Oh boy...}\\
 
-  % \medskip 
-  % Here is why the reduction can be computed in polynomial time:
+  Create $|V|^2$ boolean variables and call them $x_{i,j}$ where $0 < i, j \leq |V|$. Conceptually we will use $x_{i,j}$ to represent whether or not the $i^th$ vertex is the $j^th$ node in the Hamiltonian cycle.
+
+  The boolean equation of all $|V|^2$ variables will be constructed by and'ing ($\land$) the following maxterms:
+
+  \begin{enumerate}
+    \item $x_{i,1} \lor x_{i,2} \lor\cdots\lor x_{i,|V|}$ for all $0 < i \leq |V|$.
+    \item $\neg x_{i,j} \lor \neg x_{i,k}$ for all $0 < i, j, k \leq |V|$ where $j \neq k$.
+    \item $x_{1,i} \lor x_{2, i} \lor\cdots\lor x_{|V|, i}$ for all $0 < i \leq |V|$.
+    \item $\neg x_{i,j} \lor \neg x_{k,j}$ for all $0 < i, j, k \leq |V|$ where $j \neq k$.
+    \item $\neg x_{i,k} \lor \neg x_{j,k+1}$ for all $V_iV_j \notin E$ for all  $0 < k < |V|$.
+    \item $\neg x_{i,1} \lor \neg x_{j,|V|}$ for all $V_jV_i \notin E$.
+  \end{enumerate}
+  \lineacross 
+
+  \medskip 
+  Here is why the reduction can be computed in polynomial time:
   
-  % \lineacross 
-  % EXPLAIN WHY $\encode{\Phi}$ CAN BE COMPUTED IN POLYNOMIAL TIME GIVEN $\encode{G=(V,E)}$
-  % \lineacross 
+  \lineacross 
+  Constructing maxterms 1-4 will always take $O(V)$ time, but 5 will take $O(V^3)$ time, 
+    so the whole thing will take $O(V^3)$ time, which is polynomial.
+  \lineacross 
 
-  % \medskip 
-  % Here is a proof that the reduction is correct.
-  % \begin{lemma}
-  %   Given any instance $\encode{G=(V,E)}$ of \prob{Directed Ham Cycle},
-  %   let $\Phi$ be the instance of \prob{SAT} produced by the reduction.
-  %   Then $G$ has a directed Hamiltonian cycle 
-  %   if and only if $\Phi$ is satisfiable.
-  % \end{lemma}
-  % \begin{longFormProof}
-  %   \step First we show the ``only if'' direction.
-  %   \begin{block}[3oi]
-  %     {Assume that $G$ has a directed Hamiltonian cycle.}
-  %     \step Let $C$ be such a cycle.
-  %     \bigskip 
-
-  %     \emph{\ldots Somehow show that, since $C$ exists in $G$,
-  %       there must be an assignment $A$ to the variables of $\Phi$
-  %       that makes $\Phi$ true\ldots}
-
-  %     \bigskip 
-  %     \step $\Phi$ is satisfiable.
-  %   \end{block} 
-  %   \step Next we show the ``if'' direction.
-  %   \begin{block}[3i]
-  %     {Assume that $\Phi$ is satisfiable.}
-  %     \step Let $A$ be an assignment to the variables of $\Phi$ that makes $\Phi$ true.
-  %     \bigskip 
-      
-  %     \emph{\ldots Somehow show that, since $A$ exists,
-  %       there must be a directed Hamiltonian cycle $C$ in $G$\ldots}
-
-  %     \bigskip 
-  %     \step There is an directed Hamiltonian cycle in $G$.
-  %   \end{block} 
-  %   \step By blocks~\ref{3oi} and~\ref{3i},
-  %   $G$ has a directed Hamiltonian cycle
-  %   if and only if $\Phi$ is satisfiable.
-  % \end{longFormProof}
+  \medskip 
+  Here is a proof that the reduction is correct.
+  \begin{lemma}
+    Given any instance $\encode{G=(V,E)}$ of \prob{Directed Ham Cycle},
+    let $\Phi$ be the instance of \prob{SAT} produced by the reduction.
+    Then $G$ has a directed Hamiltonian cycle 
+    if and only if $\Phi$ is satisfiable.
+  \end{lemma}
+  \begin{longFormProof}
+    \step First we show the ``only if'' direction.
+    \begin{block}[3oi]
+      {Assume that $G$ has a directed Hamiltonian cycle.}
+      \step Let $C$ be such a cycle.
+      \step That is, there is some order the vertices can be visited, $v_1, v_2, ..., v_n, v_1$ where all are unique except the first and last and all edge used are unique.
+      \step Then we can set variables $x_{i,j}$ to true where for every vertex in $C$, 
+              $i$ is the number of the vertex in $G$ and $j$ is the index it appears in $C$.
+      \step This will satisfy the first set of maxterms since there is some $x_{k,l}$ that is true for every $k$.
+      \step This will satisfy the second set of maxterms since there is only one $x_{k,l}$ that is true for each value of $k$.
+      \step This will satisfy the third set of maxterms since there is some $x_{k,l}$ that is true for every $l$.
+      \step This will satisfy the fourth set of maxterms since there is only one $x_{k,l}$ that is true for each value of $l$.
+      \step Since we know that every $x_{i,j}, x_{i,j+1}$ that are set to true are adjacent to each other in $G$, the fifth maxterms will be satisfied.
+      \step Since we know that $v_nv_1$ is an edge in $G$, the sixth maxterms will be satisfied.
+      \step $\Phi$ is satisfiable.
+    \end{block} 
+    \step Next we show the ``if'' direction.
+    \begin{block}[3i]
+      {Assume that $\Phi$ is satisfiable.}
+      \step Let $A$ be an assignment to the variables of $\Phi$ that makes $\Phi$ true.
+      \step Construct some cycle, $C$ by examining all true variables, $x_{i,j}$ and adding vertex $i$ to index $j$ in $C$.
+      \step Because of the first set of maxterms, for every $k$, at least one $x_{k,l}$ will be true.
+      \step[A] That is, every node will be included in $C$.
+      \step Because of the second set of maxterms, for every $k$, only one $x_{k,l}$ can be true.
+      \step[B] That is, every node will be included at most once in $C$.
+      \step[AA] By Step~\ref{A} and Step~\ref{B}, every node will be included exactly once in $C$.
+      \step Because of the third set of maxterms, for every $l$, at least one $x_{k,l}$ will be true.
+      \step[C] That is, every index of $C$ will have at least one node in it.
+      \step Because of the fourth set of maxterms, for every $l$, only one $x_{k,l}$ can be true.
+      \step[D] That is, no index of $C$ will have more than one node in it.
+      \step[BB] By Step~\ref{C} and Step~\ref{D}, every index will have exactly one node in $C$.
+      \step[CC] Because of the fifth set of maxterms, nodes in adjacent indexes of $C$ must have an edge between them in $G$.
+      \step[AAA] By \ref{AA}, \ref{BB}, \ref{CC}, $C$ is a Hamiltonian path.
+      \step Because of the sixth set of maxterms, the last and first nodes in $C$ must be ajacent in $G$.
+      \step[BBB] That is, $C$ forms a cycle.
+      \step By steps~\ref{AAA}, \ref{BBB} there is a directed Hamiltonian cycle in $G$.
+    \end{block} 
+    \step By blocks~\ref{3oi} and~\ref{3i},
+    $G$ has a directed Hamiltonian cycle
+    if and only if $\Phi$ is satisfiable.
+  \end{longFormProof}
 
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
