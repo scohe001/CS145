@@ -39,7 +39,13 @@
 
       \step Call $T$ the set of chessboard squares adjacent to those in $S$ but not in $S$.
 
-      \step No row will be completely contained in $S$, since if it was, then there would be a square in every column in $S$.
+      \step Consider the largest numbered square in $S$, $s$, where the number in $s$ is $num(s)$.
+
+      \step Before adding $s$ to $S$, there were no squares in $S$ in this row.
+
+      \step Likewise, no row was full (if one had been, we would have already stopped adding to $S$ since there was a square in every column).
+
+      \step Therefore, after the addition of $s$ into $S$, no row will be completely contained in $S$.
 
       \step Conversely, every row will have at least one square in $S$.
 
@@ -47,7 +53,7 @@
 
       \step That is, $|T| \geq 8$.
 
-      \step Call the largest numbered square in $S$, $s$, where the number in $s$ is $num(s)$.
+
 
       \step Since there are at least $8$ squares in $T$ and the numbers in the squares in $T$ must be unique integers $> num(s)$, the lower bound on the largest numbered square in $T$ will be $num(s) + 8$.
 
