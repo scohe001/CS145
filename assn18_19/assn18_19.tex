@@ -1,0 +1,271 @@
+\documentclass[11pt]{article}
+
+\input{assignment-macros-3}
+
+% TODO: CHANGE NAME AND SID TO YOURS:
+
+\setTurnIn{17 solutions}  
+\setAuthor{instructor}
+\setSID{INCOMPLETE -- TO BE COMPLETED LATER THIS EVENING}
+\setHeader
+
+\begin{document}
+
+\begin{problems}
+
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+
+  \problem % problem 1
+
+  Given an instance $\encode{G=(V,E),k}$ of \prob{Independent Set},
+  the reduction outputs the instance $\encode{n, D, p, i}$ of \prob{ECD},
+  where $n$, $D$, $p$, and $i$ are defined as follows:
+
+  \lineacross 
+
+  Let $n= |V|$ be the number of vertices in $G$;
+  let $D_{ij}$ be one if there is an edge $(i,j)\in E$ and zero otherwise (for $i,j\in\{1,2,\ldots,n\}$);
+  Let $p=0$ and $i=k$.
+  
+  \lineacross 
+
+  \medskip 
+  Here is why the reduction can be computed in polynomial time:
+  
+  \lineacross 
+
+  Given $G$ and $k$, we can compute $n=|V|$ in linear time by counting the vertices.
+  We can compute the matrix $D$ in $O(n^2)$ time in a single pass over the edges.
+  We can compute $p$ and $k$ in constant time.
+
+  \lineacross 
+  
+  \medskip 
+  Here is a proof that the reduction is correct.
+  \begin{lemma}
+    Given any instance $\encode{G,k}$ of \prob{Independent Set},
+    let $\encode{n, D, p, i}$ be the instance of \prob{ECD} produced by the reduction.
+    Then $G$ has an independent set of size $k$
+    if and only if there is a set of $i$ ingredients that have total discord at most $p$.
+  \end{lemma}
+  \begin{longFormProof}
+    \step First we show the ``only if'' direction.
+    \begin{block}[1oi]
+      {Assume that $G$ has an independent set of size $k$.}
+      \step Let $I$ be an independent set of size $k$ in $G$.
+      \smallskip 
+
+      \step Take $S$ to be the set of ingredients corresponding to vertices in $I$.
+
+      \step Then $S$ has size $k$, and has total discord zero
+      because each pair $(i,j)$ of ingredients in $S$ corresponds to a pair of vertices
+      with no edge ($D_{ij}=0$).
+
+      \smallskip 
+      \step So there is a set of $i=k$ ingredients that have total discord at most $p=0$.
+    \end{block} 
+    \step Next we show the ``if'' direction.
+    \begin{block}[1i]
+      {Assume there is a set of at least $i$ ingredients that have total discord at most $p$.}
+      \step Let $S$ be a set of at $i$ ingredients that have total discord at most $p$.  Note $i=k$ and $p=0$.
+      \smallskip 
+
+      \step Take $I$ to be the vertices corresponding to ingredients in $S$.
+
+      \step Then $I$ has size $i$, and is an independent set because
+      each pair $(i,j)$ of vertices in $I$ corresponds to a pair of ingredients
+      with zero discord ($D_{ij}\le p=0$), so there is no edge $(i,j)$.
+
+      \smallskip 
+      \step There is an independent set of size $k=i$ in $G$. 
+    \end{block} 
+    \step By blocks~\ref{1oi} and~\ref{1i},
+    $G$ has an independent set of size $k$
+    if and only if there is a set of $i$ ingredients that have total discord at most $p$.
+  \end{longFormProof}
+
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+  \newpage
+  \problem % problem 2
+
+  Given an instance $\encode{G=(V,E)}$ of \prob{Directed Ham Cycle},
+  the reduction outputs the instance $\encode{G'=(V',E')}$ of \prob{Undirected Ham Cycle},
+  where $V'$ and $E'$ are defined as follows:
+
+  \lineacross 
+  For each vertex $v\in V$, add three \emph{clone} vertices $v^1, v^2, v^3$ to $V'$;
+  add edges $(v^1,v^2)$ and $(v^2, v^3)$ to $E'$.
+  For each edge $(u,w) \in E$, add edge $(w^3, v^1)$ to $E'$.
+  \lineacross 
+
+  \medskip 
+  Here is why the reduction can be computed in polynomial time:
+
+  \lineacross 
+  The reduction as described makes a single pass over the vertices and edges
+  of $G$ to build $G'$.  So it takes linear time.
+  \lineacross 
+
+  \medskip 
+  Here is a proof that the reduction is correct.
+  \begin{lemma}
+    Given any instance $\encode{G=(V,E)}$ of \prob{Directed Ham Cycle},
+    let $\encode{G'=(V',E')}$ be the instance of \prob{Undirected Ham Cycle} produced by the reduction.
+    Then $G$ has a directed Hamiltonian cycle 
+    if and only if $G'$ has an undirected Hamiltonian cycle.
+  \end{lemma}
+  \begin{longFormProof}
+    \step First we show the ``only if'' direction.
+    \begin{block}[2oi]
+      {Assume that $G$ has a directed Hamiltonian cycle.}
+      \step Let $C=(v_1, v_2, \ldots, v_n, v_1)$ be such a cycle.
+      \smallskip 
+      
+      \step Obtain $C'$ from $C$ by replacing each vertex $v_i$ by its three clones $v^1, v^2, v^3$.
+
+      \step So $C'=(v^1_1, v^2_1 v^3_1, v^1_2, v^2_2, v^3_2, \ldots, v^1_n,  v^2_n,  v^3_n,  v^1_1,  v^2_1,  v^3_1)$.
+
+      \step Since $C$ is a Hamiltonian cycle, each edge $(v_i, v_{i+1})$ is present in $G$,
+      and each vertex $v$ in $G$ is visited exactly once by $C$.
+
+      \step So each edge $(v^3_i, v^1_{i+1})$ is present in $G'$ (by the reduction),
+      and each vertex $v_i^\ell$ is visited exactly once by $C'$.
+
+      \step Also, for each $i$, each edge $(v^1_i, v^2_i)$ and $(v^2_i, v^3_i)$ is present in $G'$ (by the reduction). 
+
+      \step So $C'$ is a Hamiltonian cycle in $G'$.
+
+      \smallskip 
+    \end{block} 
+    \step Next we show the ``if'' direction.
+    \begin{block}[2i]
+      {Assume that $G'$ has a undirected Hamiltonian cycle.}
+      \step Let $C'$ be such a cycle.
+      \smallskip 
+
+      \step For each $v\in V$, the vertex $v^2$ has edges only to $v^1$ and $v^3$,
+      so edges $(v^1, v^2)$ and $(v^2, v^3)$ are present in $C'$.
+      Further, each $v^3$ has edges only to vertices $w^1$ such that $(v,w)\in E$.
+
+      \step So (starting the cycle $C'$ at an arbitrary vertex $v^1$, and orienting it so that
+      $v^2$ is the second vertex on the cycle), by a simple induction, the $3n$ vertices in $G'$ can be ordered so that
+
+      \[C'=(v^1_1, v^2_1 v^3_1, v^1_2, v^2_2, v^3_2, \ldots, v^1_n,  v^2_n,  v^3_n,  v^1_1,  v^2_1,  v^3_1).\]
+
+      \step Let $C=(v_1, v_2, \ldots, v_n, v_1)$ be obtained by replacing each clone triple $(v_i^1, v_i^2, v_i^3)$ in $V'$
+      by its original vertex $v_i$ in $G$.
+      So each vertex $v$ in $G$ is visited exactly once by $C$.
+
+      \step Each edge $(v^3_i, v_{i+1}^1)$ is present in $G'$, so, by the reduction,
+      each edge $(v_i, v_{i+1}$ is present in $G$.
+
+      \step So $C$ is a Hamiltonian cycle in $G$.
+
+      \smallskip 
+    \end{block} 
+    \step By blocks~\ref{2oi} and~\ref{2i},
+    $G$ has a directed Hamiltonian cycle
+    if and only if $G'$ has an undirected Hamiltonian cycle.
+  \end{longFormProof}
+
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+
+  \newpage
+  \problem % problem 3
+
+  Given an instance $\encode{G=(V,E)}$ of \prob{Directed Ham Cycle},
+  the reduction outputs the instance $\encode{\Phi}$ of \prob{SAT}, defined as follows:
+  
+  \lineacross 
+
+  Let $n=|V|$.
+  The Boolean variables for the formula $\Phi$ are $X=\{x_{ij} : i\in V, j\in\{1,2,\ldots,n\}\}$,
+  with the interpretation that setting $x_{ij}$ to be true should correspond to having
+  a Hamiltonian cycle in $G$ with vertex $i$ at position $j$.
+
+  \newcommand{\one}{\mbox{\sf one}}
+  For any set of variables $S\subseteq X$, define $\one(S)$
+  to be the formula $(\bigvee_{x \in S} x) \wedge \neg (\bigvee_{x,x'\in S: x\ne x'} x \wedge \ x')$.
+  So $\one(S)$ is satisfied
+  if and only if exactly one of the variables in $S$ is assigned true.
+
+  Take $\Phi$ to be logical and of the following expressions:
+  \begin{enumerate}
+  \item For each vertex $i$, $\one(\{x_{i1}, x_{i2}, \ldots, x_{in}\})$.
+    (Each vertex should have one position.)
+
+  \item For each position $j$, $\one(\{x_{1j}, x_{2j}, \ldots, x_{nj}\})$.
+    (Each position should have one vertex.)
+
+  \item For each position $j$, and pair of vertices $i, i'$ such that $(i,i')\not\in E$,
+    add clause $\neg (x_{ij} \wedge x_{i',j+1})$
+    or, if $j=n$, then add clause  $\neg (x_{ij} \wedge x_{i',1})$.
+    (In other words, vertex $i'$ cannot follow vertex $i$ on the cycle
+    if there is no edge $(i,i')$).
+  \end{enumerate}
+  
+  \lineacross 
+
+  \medskip 
+  Here is why the reduction can be computed in polynomial time:
+  
+  \lineacross 
+  
+  $\Phi$ can be built as described above in time $O(|V|^2 + |E|\,|V|)$
+  by appropriately enumerating the vertices $i\in V$ and positions $j\in\{1,\ldots,n\}$.
+
+  \lineacross 
+
+  \medskip 
+  Here is a proof that the reduction is correct.
+  \begin{lemma}
+    Given any instance $\encode{G=(V,E)}$ of \prob{Directed Ham Cycle},
+    let $\Phi$ be the instance of \prob{SAT} produced by the reduction.
+    Then $G$ has a directed Hamiltonian cycle 
+    if and only if $\Phi$ is satisfiable.
+  \end{lemma}
+  \begin{longFormProof}
+    \step First we show the ``only if'' direction.
+    \begin{block}[3oi]
+      {Assume that $G$ has a directed Hamiltonian cycle.}
+      \step Let $C$ be such a cycle.
+      \smallskip 
+
+      \emph{\ldots Somehow show that, since $C$ exists in $G$,
+        there must be an assignment $A$ to the variables of $\Phi$
+        that makes $\Phi$ true\ldots}
+
+      \smallskip 
+      \step $\Phi$ is satisfiable.
+    \end{block} 
+    \step Next we show the ``if'' direction.
+    \begin{block}[3i]
+      {Assume that $\Phi$ is satisfiable.}
+      \step Let $A$ be an assignment to the variables of $\Phi$ that makes $\Phi$ true.
+      \smallskip 
+      
+      \emph{\ldots Somehow show that, since $A$ exists,
+        there must be a directed Hamiltonian cycle $C$ in $G$\ldots}
+
+      \smallskip 
+      \step There is an directed Hamiltonian cycle in $G$.
+    \end{block} 
+    \step By blocks~\ref{3oi} and~\ref{3i},
+    $G$ has a directed Hamiltonian cycle
+    if and only if $\Phi$ is satisfiable.
+  \end{longFormProof}
+
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+
+\end{problems}
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
