@@ -4,9 +4,9 @@
 
 % TODO: CHANGE NAME AND SID TO YOURS:
 
-\setTurnIn{17 solutions}  
-\setAuthor{instructor}
-\setSID{INCOMPLETE -- TO BE COMPLETED LATER THIS EVENING}
+\setTurnIn{17/18}  
+\setAuthor{Stanley Cohen (scohe001)}
+\setSID{861114309}
 \setHeader
 
 \begin{document}
@@ -18,15 +18,20 @@
 
   \problem % problem 1
 
-  Given an instance $\encode{G=(V,E),k}$ of \prob{Independent Set},
-  the reduction outputs the instance $\encode{n, D, p, i}$ of \prob{ECD},
-  where $n$, $D$, $p$, and $i$ are defined as follows:
+    Describe a polynomial-time reduction from Vertex Cover to Set Cover.
+  Definition of Set Cover: The input is $⟨U,C,k⟩$ where U is a set, $C = \{S1,S2,...,Sm\}$ is a collection of subsets of U, and k is an integer. The output is ‘yes’ if there is a set cover in C of size k, and ‘no’ otherwise. A set cover is a collection C′ ⊆ C of sets in C such that the union of the sets in $C′$ is $U$. The size of $C′$ is the number of sets in $C′$.
+
+  Given an instance $\encode{G=(V,E),k}$ of \prob{Vertex Cover},
+  the reduction outputs the instance $\encode{U,C,k}$ of \prob{Set Cover},
+  where $U$, $C$, and $k$ are defined as follows:
 
   \lineacross 
 
-  Let $n= |V|$ be the number of vertices in $G$;
-  let $D_{ij}$ be one if there is an edge $(i,j)\in E$ and zero otherwise (for $i,j\in\{1,2,\ldots,n\}$);
-  Let $p=0$ and $i=k$.
+  Let $U = E$ be the set of edges in $G$;
+
+  let $C_i$ be the number of edges touched by $V_i$, that is $C_i = \{e_{V_iV_j} | e_{V_iV_j} \in E\}$;
+  
+  Let $k$ be $k$ from the Vertex Cover problem.
   
   \lineacross 
 
@@ -35,35 +40,32 @@
   
   \lineacross 
 
-  Given $G$ and $k$, we can compute $n=|V|$ in linear time by counting the vertices.
-  We can compute the matrix $D$ in $O(n^2)$ time in a single pass over the edges.
-  We can compute $p$ and $k$ in constant time.
+  Constructing $C$ will require at worst a loop over the edge set for each vertex, resulting in $O(VE)$ time, which is polynomial.
 
   \lineacross 
   
   \medskip 
   Here is a proof that the reduction is correct.
   \begin{lemma}
-    Given any instance $\encode{G,k}$ of \prob{Independent Set},
-    let $\encode{n, D, p, i}$ be the instance of \prob{ECD} produced by the reduction.
-    Then $G$ has an independent set of size $k$
-    if and only if there is a set of $i$ ingredients that have total discord at most $p$.
+    Given any instance $\encode{G,k}$ of \prob{Vertex Cover},
+    let $\encode{U,C,k}$ be the instance of \prob{Set Cover} produced by the reduction.
+    Then $G$ has a vertex cover of size $k$
+    if and only if there is a set $C' \subseteq C$ of size $k$ where $\bigcup\limits_{i=1}^{k} C'_i = U$.
   \end{lemma}
   \begin{longFormProof}
     \step First we show the ``only if'' direction.
     \begin{block}[1oi]
-      {Assume that $G$ has an independent set of size $k$.}
-      \step Let $I$ be an independent set of size $k$ in $G$.
+      {Assume that $G$ has a vertex cover of size $k$.}
+      \step Let $I$ be the vertex cover of size $k$ in $G$.
       \smallskip 
 
-      \step Take $S$ to be the set of ingredients corresponding to vertices in $I$.
+      \step Take $C'$ to be the set of sets in $C$ corresponding to the vertices in $I$.
 
-      \step Then $S$ has size $k$, and has total discord zero
-      because each pair $(i,j)$ of ingredients in $S$ corresponds to a pair of vertices
-      with no edge ($D_{ij}=0$).
+      \step Then $C'$ has size $k$, and the union of all sets in $C'$ equal $U$
+              because each set in $C'$, $C'_i$ corresponds to the edges touched by including vertex $V_i$.
 
       \smallskip 
-      \step So there is a set of $i=k$ ingredients that have total discord at most $p=0$.
+      \step So there is a subset of size $k$ of $C$ such that the union over them all will equal $U$.
     \end{block} 
     \step Next we show the ``if'' direction.
     \begin{block}[1i]
