@@ -9,6 +9,12 @@
 \setSID{861114309}
 \setHeader
 
+\newcommand{\PROB}[2]{
+  \begin{description}
+  \item[]Definition of \prob{#1}:#2
+  \end{description}
+}
+
 \begin{document}
 
 \begin{problems}
@@ -19,19 +25,18 @@
   \problem % problem 1
 
     Describe a polynomial-time reduction from Vertex Cover to Set Cover.
-  Definition of Set Cover: The input is $⟨U,C,k⟩$ where U is a set, $C = \{S1,S2,...,Sm\}$ is a collection of subsets of U, and k is an integer. The output is ‘yes’ if there is a set cover in C of size k, and ‘no’ otherwise. A set cover is a collection C′ ⊆ C of sets in C such that the union of the sets in $C′$ is $U$. The size of $C′$ is the number of sets in $C′$.
 
   Given an instance $\encode{G=(V,E),k}$ of \prob{Vertex Cover},
-  the reduction outputs the instance $\encode{U,C,k}$ of \prob{Set Cover},
-  where $U$, $C$, and $k$ are defined as follows:
+  the reduction outputs the instance $\encode{U,C,k'}$ of \prob{Set Cover},
+  where $U$, $C$, and $k'$ are defined as follows:
 
   \lineacross 
 
   Let $U = E$ be the set of edges in $G$;
 
-  let $C_i$ be the number of edges touched by $V_i$, that is $C_i = \{e_{V_iV_j} | e_{V_iV_j} \in E\}$;
+  let $C_i$ be the edges touched by $v_i$, that is $C_i = \{e_{v_iv_j} | e_{v_iv_j} \in E\}$, unioned with $v_i$ itself;
   
-  Let $k$ be $k$ from the Vertex Cover problem.
+  Let $k'$ be $k$ from the Vertex Cover problem.
   
   \lineacross 
 
@@ -50,7 +55,7 @@
     Given any instance $\encode{G,k}$ of \prob{Vertex Cover},
     let $\encode{U,C,k}$ be the instance of \prob{Set Cover} produced by the reduction.
     Then $G$ has a vertex cover of size $k$
-    if and only if there is a set $C' \subseteq C$ of size $k$ where $\bigcup\limits_{i=1}^{k} C'_i = U$.
+    if and only if there is a set cover, $C'$ of size $k'$.
   \end{lemma}
   \begin{longFormProof}
     \step First we show the ``only if'' direction.
@@ -61,116 +66,125 @@
 
       \step Take $C'$ to be the set of sets in $C$ corresponding to the vertices in $I$.
 
-      \step Then $C'$ has size $k$, and the union of all sets in $C'$ equal $U$
-              because each set in $C'$, $C'_i$ corresponds to the edges touched by including vertex $V_i$.
+      \step Then $C'$ has size $k'$.
+
+      \step Since every edge, $v_iv_j$ in $E$, has a vertex in $I$ (that is, either $v_i$ or $v_j$ is in $I$ by definition of vertex cover), 
+              all of the edges will be present in the union of the sets of $C'$.
+
+      \step That is, the union of the sets of $C'$ will produce a set of all the edges in the graph, which is exactly $U$.
 
       \smallskip 
       \step So there is a subset of size $k$ of $C$ such that the union over them all will equal $U$.
     \end{block} 
     \step Next we show the ``if'' direction.
     \begin{block}[1i]
-      {Assume there is a set of at least $i$ ingredients that have total discord at most $p$.}
-      \step Let $S$ be a set of at $i$ ingredients that have total discord at most $p$.  Note $i=k$ and $p=0$.
+      {Assume that there are some $k'$ sets of $C$ such that the union over them all will equal $U$.}
+      \step Let $C'$ be the set of $k'$ sets of $C$.
       \smallskip 
 
-      \step Take $I$ to be the vertices corresponding to ingredients in $S$.
+      \step Take $I$ to be the vertices corresponding to sets in $C'$.
 
-      \step Then $I$ has size $i$, and is an independent set because
-      each pair $(i,j)$ of vertices in $I$ corresponds to a pair of ingredients
-      with zero discord ($D_{ij}\le p=0$), so there is no edge $(i,j)$.
+      \step Then $I$ has size $k$.
+
+      \step The union of the edges touched by the nodes in $I$ will be $U$, which is exactly $E$.
 
       \smallskip 
-      \step There is an independent set of size $k=i$ in $G$. 
+      \step There is a vertex cover of size $k=k'$ in $G$. 
     \end{block} 
     \step By blocks~\ref{1oi} and~\ref{1i},
-    $G$ has an independent set of size $k$
-    if and only if there is a set of $i$ ingredients that have total discord at most $p$.
+    $G$ has a vertex cover of size $k$
+    if and only if there is a set cover, $C'$ of size $k'$.
   \end{longFormProof}
 
-  % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-  % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-  % \newpage
-  % \problem % problem 2
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+  \newpage
+  \problem % problem 2
 
-  % Given an instance $\encode{G=(V,E)}$ of \prob{Directed Ham Cycle},
-  % the reduction outputs the instance $\encode{G'=(V',E')}$ of \prob{Undirected Ham Cycle},
-  % where $V'$ and $E'$ are defined as follows:
+  Describe a polynomial-time reduction from \prob{Subset Sum} to \prob{Zero Path}. 
 
-  % \lineacross 
-  % For each vertex $v\in V$, add three \emph{clone} vertices $v^1, v^2, v^3$ to $V'$;
-  % add edges $(v^1,v^2)$ and $(v^2, v^3)$ to $E'$.
-  % For each edge $(u,w) \in E$, add edge $(w^3, v^1)$ to $E'$.
-  % \lineacross 
+  \PROB{Zero Path}{
+    The input is $\langle G, s, t \rangle$,
+    where $G=(V,E)$ is an acyclic directed graph with (possibly negative) integer edge weights,
+    and $s$ and $t$ are vertices.
+    The output is `yes' if there is a path $P$ from $s$ to $t$ in $G$ such that the total weight of the edges in $P$ is zero,
+    and `no' otherwise.}
 
-  % \medskip 
-  % Here is why the reduction can be computed in polynomial time:
+  \PROB{Subset Sum}{
+    The input is $\langle x, T\rangle$,
+    where $x=(x_1, x_2, \ldots, x_n)$ is a sequence of $n$ integers,  and $T$ is an integer.
+    The output is `yes' if there is a subset $S\subseteq \{1,2,\ldots,n\}$
+    with $\sum_{i\in S} x_i = T$, and `no' otherwise.}
 
-  % \lineacross 
-  % The reduction as described makes a single pass over the vertices and edges
-  % of $G$ to build $G'$.  So it takes linear time.
-  % \lineacross 
+  \lineacross 
+  Create two vertices, $v_s$ and $v_{s'}$ with an edge, $v_sv_{s'}$ of weight, $-T$.
 
-  % \medskip 
-  % Here is a proof that the reduction is correct.
-  % \begin{lemma}
-  %   Given any instance $\encode{G=(V,E)}$ of \prob{Directed Ham Cycle},
-  %   let $\encode{G'=(V',E')}$ be the instance of \prob{Undirected Ham Cycle} produced by the reduction.
-  %   Then $G$ has a directed Hamiltonian cycle 
-  %   if and only if $G'$ has an undirected Hamiltonian cycle.
-  % \end{lemma}
-  % \begin{longFormProof}
-  %   \step First we show the ``only if'' direction.
-  %   \begin{block}[2oi]
-  %     {Assume that $G$ has a directed Hamiltonian cycle.}
-  %     \step Let $C=(v_1, v_2, \ldots, v_n, v_1)$ be such a cycle.
-  %     \smallskip 
+  Then create a widget for each $x_i$ in $x$ with two vertices, $v_i$ and $v_i'$ and two edges between them, $v_iv_i'$ of weights 0 and $x_i$.
+
+  String together any two widgets, $i$ and $j$ by creating an edge $v_i'v_j$ of weight 0.
+
+  Connect the first widget, $k$ with the start by creating the edge $v_{s'}v_k$ of weight 0.
+
+  Connect the last widget, $l$ to the the end node, $v_t$ by adding the edge $v_l'v_t$ of weight 0.
+  \lineacross 
+
+  \medskip 
+  Here is why the reduction can be computed in polynomial time:
+
+  \lineacross 
+  The reduction as described makes a single pass over the set $x$ to construct the graph, so it'll work in polynomial time.
+  \lineacross 
+
+  \medskip 
+  Here is a proof that the reduction is correct.
+  \begin{lemma}
+    Given any instance $\encode{x, T}$ of \prob{Subset Sum},
+    let $\encode{G=(V,E), s, t}$ be the instance of \prob{Zero Path} produced by the reduction.
+    Then $x$ has a Subset Sum
+    if and only if $G$ has a Zero Path.
+  \end{lemma}
+  \begin{longFormProof}
+    \step First we show the ``only if'' direction.
+    \begin{block}[2oi]
+      {Assume that $x$ has a Subset Sum of $T$.}
+      \smallskip 
       
-  %     \step Obtain $C'$ from $C$ by replacing each vertex $v_i$ by its three clones $v^1, v^2, v^3$.
+      \step For each $x_i \in x$, if $x_i$ was used in the sum to get $T$, take the edge in the corresponding widget of weight $x_i$. 
+              Else, take the edge of weight 0.
 
-  %     \step So $C'=(v^1_1, v^2_1 v^3_1, v^1_2, v^2_2, v^3_2, \ldots, v^1_n,  v^2_n,  v^3_n,  v^1_1,  v^2_1,  v^3_1)$.
+      \step Among the widgets traversed, the weight of the path will be $T$, but the first edge taken, 
+              edge $v_sv_{s'}$ was of weight $-T$, so the path weight will be 0.
 
-  %     \step Since $C$ is a Hamiltonian cycle, each edge $(v_i, v_{i+1})$ is present in $G$,
-  %     and each vertex $v$ in $G$ is visited exactly once by $C$.
+      \step So $G$ has a path from $v_s$ to $v_t$ of weight 0.
 
-  %     \step So each edge $(v^3_i, v^1_{i+1})$ is present in $G'$ (by the reduction),
-  %     and each vertex $v_i^\ell$ is visited exactly once by $C'$.
+      \smallskip 
+    \end{block} 
+    \step Next we show the ``if'' direction.
+    \begin{block}[2i]
+      {Assume that $G$ has a Zero Path from $v_s$ to $v_t$.}
+      \step Let $P$ be such a path.
+      \smallskip 
 
-  %     \step Also, for each $i$, each edge $(v^1_i, v^2_i)$ and $(v^2_i, v^3_i)$ is present in $G'$ (by the reduction). 
+      \step $P$ must traverse the edge $v_sv_{s'}$ as it is the only edge out of $v_s$.
 
-  %     \step So $C'$ is a Hamiltonian cycle in $G'$.
+      \step $P$ must traverse every widget since there is no other way to reach $v_t$ from $v_s$.
 
-  %     \smallskip 
-  %   \end{block} 
-  %   \step Next we show the ``if'' direction.
-  %   \begin{block}[2i]
-  %     {Assume that $G'$ has a undirected Hamiltonian cycle.}
-  %     \step Let $C'$ be such a cycle.
-  %     \smallskip 
+      \step At every widget, the weight of the path either increased by some $x_i$, or remained unchanged.
 
-  %     \step For each $v\in V$, the vertex $v^2$ has edges only to $v^1$ and $v^3$,
-  %     so edges $(v^1, v^2)$ and $(v^2, v^3)$ are present in $C'$.
-  %     Further, each $v^3$ has edges only to vertices $w^1$ such that $(v,w)\in E$.
+      \step For the weight of $P$ to be Zero, some set $x'$ of non-zero widget edges must've been traversed that sum to the weight of $v_sv_{s'}$.
 
-  %     \step So (starting the cycle $C'$ at an arbitrary vertex $v^1$, and orienting it so that
-  %     $v^2$ is the second vertex on the cycle), by a simple induction, the $3n$ vertices in $G'$ can be ordered so that
+      \step Then $x'$ is the set of widget weight that sum to $v_sv_{s'}$, which is exactly $T$.
 
-  %     \[C'=(v^1_1, v^2_1 v^3_1, v^1_2, v^2_2, v^3_2, \ldots, v^1_n,  v^2_n,  v^3_n,  v^1_1,  v^2_1,  v^3_1).\]
+      \step Further, the non-zero widget weights, $x' \subseteq x$.
 
-  %     \step Let $C=(v_1, v_2, \ldots, v_n, v_1)$ be obtained by replacing each clone triple $(v_i^1, v_i^2, v_i^3)$ in $V'$
-  %     by its original vertex $v_i$ in $G$.
-  %     So each vertex $v$ in $G$ is visited exactly once by $C$.
+      \step There is a subset, $x' \subseteq x$ whose values sum to $T$.
 
-  %     \step Each edge $(v^3_i, v_{i+1}^1)$ is present in $G'$, so, by the reduction,
-  %     each edge $(v_i, v_{i+1}$ is present in $G$.
-
-  %     \step So $C$ is a Hamiltonian cycle in $G$.
-
-  %     \smallskip 
-  %   \end{block} 
-  %   \step By blocks~\ref{2oi} and~\ref{2i},
-  %   $G$ has a directed Hamiltonian cycle
-  %   if and only if $G'$ has an undirected Hamiltonian cycle.
-  % \end{longFormProof}
+      \smallskip 
+    \end{block} 
+    \step By blocks~\ref{2oi} and~\ref{2i},
+    $x$ has a Subset Sum
+    if and only if $G$ has a Zero Path.
+  \end{longFormProof}
 
   % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
   % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
